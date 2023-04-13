@@ -1,11 +1,11 @@
 package DoAn;
-
-import java.awt.event.*;
 import javax.swing.*;
+
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
 
 
 public class GiaoDienDNSinhVien extends JFrame implements ActionListener {
@@ -75,7 +75,6 @@ public class GiaoDienDNSinhVien extends JFrame implements ActionListener {
 
 		//Bot ------- Màn Hình Đăng Nhập
 		JButton btDangNhap= new JButton("Đăng Nhập");
-		btDangNhap.addActionListener(this);
 		JLabel label = new JLabel("<html><u>Quên Mật Khẩu</u></html>",JLabel.CENTER);
         label.addMouseListener(new MouseAdapter() {
             @Override
@@ -83,7 +82,6 @@ public class GiaoDienDNSinhVien extends JFrame implements ActionListener {
                 System.out.println("Label clicked!");
             }
         });
-
 		JPanel btBot=new JPanel(new GridLayout(1,2,10,10));
 		btBot.add(btDangNhap);
 		btBot.add(label);
@@ -97,21 +95,21 @@ public class GiaoDienDNSinhVien extends JFrame implements ActionListener {
 		panel.add(pnlRONG2,BorderLayout.WEST);
 		panel.add(btBot,BorderLayout.SOUTH);
 		add(panel);
-
+		btDangNhap.addActionListener(this);
+		
 	}
 
-
-		public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e) {
 			
-			if (radio1.isSelected()) {
-				new GiaoDienSinhVien();
-			} else if (radio2.isSelected()) {
-				System.out.println("Giảng Viên");
-			} else if (radio3.isSelected()) {
-				System.out.println("Khoa");
-			}
-	}
-
+		if (radio1.isSelected()) {
+			new GiaoDienSinhVien();
+		} else if (radio2.isSelected()) {
+			System.out.println("Giảng Viên");
+		} else if (radio3.isSelected()) {
+			System.out.println("Khoa");
+		}
+		dispose();
+}
 
 
 	public static void main(String[] args){
