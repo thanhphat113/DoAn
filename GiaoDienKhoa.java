@@ -1,4 +1,4 @@
-package com.mycompany.doanjava;
+package doanjava;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -36,18 +36,14 @@ public class GiaoDienKhoa extends JFrame{
             this.password=b;
             unitGUI();
         }
-        
-    public GiaoDienKhoa(){
-        unitGUI();
-    }
     
     public void unitGUI(){
-        GiaoDienDNSinhVien DNSV= new GiaoDienDNSinhVien();
         setSize(800,450);
         setVisible(true);
         setLocationRelativeTo(null);
         setTitle("Ứng dụng quản lí sinh viên");
         setLayout(new BorderLayout());
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         
         Font font = new Font("Arial", Font.BOLD, 25);
         Font font1 = new Font("Arial", Font.BOLD, 15);
@@ -55,7 +51,7 @@ public class GiaoDienKhoa extends JFrame{
         JLabel tieuDe = new JLabel("Màn hình Khoa");
         tieuDe.setFont(font);
             
-        JLabel xinchao = new JLabel("Xin chào " + "(" + ")");
+        JLabel xinchao = new JLabel("Xin chào " + "(" +userID+ ")");
         JLabel DangXuat = new JLabel("<html><u>Đăng xuất</u></html>");
             DangXuat.addMouseListener(new MouseAdapter (){
                 @Override
@@ -70,8 +66,8 @@ public class GiaoDienKhoa extends JFrame{
             GioiThieu.add(xinchao);
             GioiThieu.add(DangXuat);
             GioiThieu.setBackground(new Color(213,232,212));
-                tieuDe.setAlignmentX(Component.CENTER_ALIGNMENT);
-                tieuDe.setAlignmentY(Component.CENTER_ALIGNMENT);
+            tieuDe.setAlignmentX(Component.CENTER_ALIGNMENT);
+            tieuDe.setAlignmentY(Component.CENTER_ALIGNMENT);
             GioiThieu.setAlignmentX(Component.CENTER_ALIGNMENT);
             GioiThieu.setAlignmentY(Component.CENTER_ALIGNMENT);
                 
@@ -106,6 +102,30 @@ public class GiaoDienKhoa extends JFrame{
         JTable bangDSSV=new JTable(modelDSSV);
         bangDSSV.getTableHeader().setReorderingAllowed(false);
         JScrollPane scrollPaneDSSV = new JScrollPane(bangDSSV);
+        scrollPaneDSSV.setPreferredSize(new Dimension(0,100));
+        
+//        JPanel khungThongTin= new JPanel(new GridLayout(2,1));
+//        JPanel khungTT1=new JPanel();
+//        khungTT1.setLayout(new BoxLayout(khungTT1,BoxLayout.X_AXIS));
+//        khungTT1.add(new JLabel("Mã Sinh Viên"));
+//        khungTT1.add(new JTextField());
+//        khungTT1.add(new JLabel("Tên Sinh Viên"));
+//        khungTT1.add(new JTextField());
+//        khungTT1.add(new JLabel("Năm Sinh"));
+//        khungTT1.add(new JTextField());
+//        khungTT1.add(new JLabel("Giới Tính"));
+//        khungTT1.add(new JTextField());
+//        JPanel khungTT2=new JPanel();
+//        khungTT2.setLayout(new BoxLayout(khungTT2,BoxLayout.X_AXIS));
+//        khungTT2.add(new JLabel("Dân Tộc"));
+//        khungTT2.add(new JTextField());
+//        khungTT2.add(new JLabel("CCCD/CMND"));
+//        khungTT2.add(new JTextField());
+//        khungTT2.add(new JLabel("Số Điện Thoại"));
+//        khungTT2.add(new JTextField());
+//        khungThongTin.add(khungTT1);
+//        khungThongTin.add(khungTT2);
+        
         DSSV.add(scrollPaneDSSV,BorderLayout.CENTER);
         DSSV.add(chonLoc,BorderLayout.NORTH);            
         
