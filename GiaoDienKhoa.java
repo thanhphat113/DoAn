@@ -1,10 +1,12 @@
-package doanjava;
+package com.mycompany.doanjava;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -36,6 +38,10 @@ public class GiaoDienKhoa extends JFrame{
             this.password=b;
             unitGUI();
         }
+        
+    public GiaoDienKhoa(){
+        unitGUI();
+    }
     
     public void unitGUI(){
         setSize(800,450);
@@ -51,7 +57,7 @@ public class GiaoDienKhoa extends JFrame{
         JLabel tieuDe = new JLabel("Màn hình Khoa");
         tieuDe.setFont(font);
             
-        JLabel xinchao = new JLabel("Xin chào " + "(" +userID+ ")");
+        JLabel xinchao = new JLabel("Xin chào " + "(" + ")");
         JLabel DangXuat = new JLabel("<html><u>Đăng xuất</u></html>");
             DangXuat.addMouseListener(new MouseAdapter (){
                 @Override
@@ -66,8 +72,8 @@ public class GiaoDienKhoa extends JFrame{
             GioiThieu.add(xinchao);
             GioiThieu.add(DangXuat);
             GioiThieu.setBackground(new Color(213,232,212));
-            tieuDe.setAlignmentX(Component.CENTER_ALIGNMENT);
-            tieuDe.setAlignmentY(Component.CENTER_ALIGNMENT);
+                tieuDe.setAlignmentX(Component.CENTER_ALIGNMENT);
+                tieuDe.setAlignmentY(Component.CENTER_ALIGNMENT);
             GioiThieu.setAlignmentX(Component.CENTER_ALIGNMENT);
             GioiThieu.setAlignmentY(Component.CENTER_ALIGNMENT);
                 
@@ -96,38 +102,116 @@ public class GiaoDienKhoa extends JFrame{
         Loc.add(bt1);
         JPanel chonLoc=new JPanel(new GridLayout(1,2 ));
         chonLoc.add(Loc);
-        chonLoc.add(new JPanel());
+        chonLoc.setPreferredSize(new Dimension(0,40));
         String columnDSSV[]={"Mã SV","Tên sinh viên","Năm sinh","Giới tính","Dân tộc","CCCD/CMND", "Số điện thoại"};
         DefaultTableModel modelDSSV = new DefaultTableModel(columnDSSV, 0);
         JTable bangDSSV=new JTable(modelDSSV);
         bangDSSV.getTableHeader().setReorderingAllowed(false);
         JScrollPane scrollPaneDSSV = new JScrollPane(bangDSSV);
-        scrollPaneDSSV.setPreferredSize(new Dimension(0,100));
+        JPanel pn1 = new JPanel();
+        JTextField msv = new JTextField();
+        JLabel lbm = new JLabel("Mã sv: ");
+        JTextField tensv = new JTextField();
+        JLabel lbt = new JLabel("Tên: ");
+        JTextField lop = new JTextField();
+        JLabel lbl = new JLabel("Lớp");
+        JTextField namsinh = new JTextField();
+        JLabel lbn = new JLabel("Năm sinh");
+        JTextField gioitinh = new JTextField();
+        JLabel lbg = new JLabel("Giới tính: ");
+        JTextField dantoc = new JTextField();
+        JLabel lbd = new JLabel("Dân tộc");
+        JTextField cccd = new JTextField();
+        JLabel lbc = new JLabel("CCCĐ/CMND");
+        JTextField sdt = new JTextField();
+        JLabel lbs = new JLabel("Số ĐT:");
+        pn1.setLayout(new GridLayout(1,4,10,10));
+        pn1.add(lbm);
+        pn1.add(msv);
+        pn1.add(lbt);
+        pn1.add(tensv);
+        pn1.add(lbl);
+        pn1.add(lop);
+        pn1.add(lbn);
+        pn1.add(namsinh);
+        pn1.add(lbg);
+        pn1.add(gioitinh);
+        pn1.add(lbd);
+        pn1.add(dantoc);
+        pn1.add(lbc);
+        pn1.add(cccd);
+        pn1.add(lbs);
+        pn1.add(sdt);
+        pn1.setPreferredSize(new Dimension(0,50));
+        JPanel pn2 = new JPanel();
+        pn2.setLayout(new GridLayout(1,4,10,10));
+        pn2.add(lbg);
+        pn2.add(gioitinh);
+        pn2.add(lbd);
+        pn2.add(dantoc);
+        pn2.add(lbc);
+        pn2.add(cccd);
+        pn2.add(lbs);
+        pn2.add(sdt);
+        pn2.setPreferredSize(new Dimension(0,50));
+        JPanel pn3 = new JPanel();
+        JButton them = new JButton("Thêm");
+        JButton sua = new JButton("Sửa");
+        JButton xoa = new JButton("Xóa");
+        JButton xemdiem = new JButton("Xem điểm");
+        pn3.setLayout(new GridLayout(1,4,75,50));
+        pn3.add(them);
+        pn3.add(sua);
+        pn3.add(xoa);
+        pn3.add(xemdiem);
+        pn3.setPreferredSize(new Dimension(0,55));
+        JPanel pnp = new JPanel();
+        pnp.setPreferredSize(new Dimension(0,130));
+        pnp.setLayout(new GridLayout(4,1,0,10));
+        pnp.add(pn1);
+        pnp.add(pn2);
+        pnp.add(pn3);
+        pnp.add(chonLoc);
+//        GridBagLayout lo = new GridBagLayout();
+//        pnp.setLayout(lo);
+//        GridBagConstraints gbc = new GridBagConstraints();
+//        gbc.fill = GridBagConstraints.HORIZONTAL;
+//        gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+//        gbc.anchor = GridBagConstraints.LAST_LINE_START;
+//        gbc.gridx = 0;
+//        gbc.gridy = 0;
+//        pnp.add(pn1,gbc);
+//        gbc.fill = GridBagConstraints.HORIZONTAL;
+//        gbc.gridx = 0;
+//        gbc.gridy = 2;
+//        pnp.add(pn2,gbc);
+//        gbc.fill = GridBagConstraints.HORIZONTAL;
+//        gbc.gridx = 0;
+//        gbc.gridy = 4;
+//        pnp.add(pn3,gbc);
+//        gbc.fill = GridBagConstraints.HORIZONTAL;
+//        gbc.gridx = 0;
+//        gbc.gridy = 6;
+//        pnp.add(chonLoc, gbc);
+//        gbc.ipady = 5;
+//        gbc.gridx = 0;
+//        gbc.gridy = 1;
+//        pnp.add(new JLabel(), gbc);
+//        gbc.ipady = 5;
+//        gbc.gridx = 0;
+//        gbc.gridy = 3;
+//        pnp.add(new JLabel(), gbc);
+//        gbc.ipady = 5;
+//        gbc.gridx = 0;
+//        gbc.gridy = 5;
+//        pnp.add(new JLabel(), gbc);
+        pnp.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
         
-//        JPanel khungThongTin= new JPanel(new GridLayout(2,1));
-//        JPanel khungTT1=new JPanel();
-//        khungTT1.setLayout(new BoxLayout(khungTT1,BoxLayout.X_AXIS));
-//        khungTT1.add(new JLabel("Mã Sinh Viên"));
-//        khungTT1.add(new JTextField());
-//        khungTT1.add(new JLabel("Tên Sinh Viên"));
-//        khungTT1.add(new JTextField());
-//        khungTT1.add(new JLabel("Năm Sinh"));
-//        khungTT1.add(new JTextField());
-//        khungTT1.add(new JLabel("Giới Tính"));
-//        khungTT1.add(new JTextField());
-//        JPanel khungTT2=new JPanel();
-//        khungTT2.setLayout(new BoxLayout(khungTT2,BoxLayout.X_AXIS));
-//        khungTT2.add(new JLabel("Dân Tộc"));
-//        khungTT2.add(new JTextField());
-//        khungTT2.add(new JLabel("CCCD/CMND"));
-//        khungTT2.add(new JTextField());
-//        khungTT2.add(new JLabel("Số Điện Thoại"));
-//        khungTT2.add(new JTextField());
-//        khungThongTin.add(khungTT1);
-//        khungThongTin.add(khungTT2);
         
         DSSV.add(scrollPaneDSSV,BorderLayout.CENTER);
-        DSSV.add(chonLoc,BorderLayout.NORTH);            
+        DSSV.add(pnp,BorderLayout.NORTH);
+        
+        
         
         //Danh sách giảng viên
         JPanel DSGV=new JPanel(new BorderLayout());
@@ -220,6 +304,7 @@ public class GiaoDienKhoa extends JFrame{
         add(thanhChon,BorderLayout.CENTER);
         add(new JPanel(),BorderLayout.WEST);
         add(new JPanel(),BorderLayout.EAST);
-        add(new JPanel(),BorderLayout.SOUTH);       
+        add(new JPanel(),BorderLayout.SOUTH);   
+        
     }
 }
