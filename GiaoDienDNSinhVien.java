@@ -1,4 +1,4 @@
-package com.mycompany.doanjava;
+package doan;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -92,14 +92,16 @@ public class GiaoDienDNSinhVien extends JFrame {
                 } else if (radio2.isSelected()) {
                     if (TK.isEmpty() || MK.isEmpty())	JOptionPane.showMessageDialog(new JFrame(), "Tài khoản hoặc mật khẩu của bạn không hợp lệ!!!");
                     else{
-                         System.out.println("Giảng Viên");
+                        GiaoDienGiangVien frGDGV=new GiaoDienGiangVien(TK,MK);
+                        frGDGV.setVisible(true);
                         dispose();
                     }
                 } else if (radio3.isSelected()) {
                     if (TK.isEmpty() || MK.isEmpty())	JOptionPane.showMessageDialog(new JFrame(), "Tài khoản hoặc mật khẩu của bạn không hợp lệ!!!");
                     else{
-                        System.out.println("Khoa");
-                        
+                        GiaoDienKhoa frGDK=new GiaoDienKhoa(TK,MK);
+                        frGDK.setVisible(true);
+                        dispose();
                     }
                 }
                 else JOptionPane.showMessageDialog(new JFrame(), "Vui Lòng Chọn Loại Đối Tượng");

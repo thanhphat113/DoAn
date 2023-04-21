@@ -5,6 +5,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
@@ -26,26 +27,25 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 
-public class GiaoDienSinhVien extends JFrame{
+public class GiaoDienGiangVien extends JFrame{
     private String userID;
     private String password;
-    
-   
-        public GiaoDienSinhVien(String a,String b){
-            this.userID=a;
-            this.password=b;
-            unitGUI();
-        }
-        
-        public void unitGUI(){
-            setSize(800,450);
-            setLocationRelativeTo(null);
-            setTitle("Ứng Dụng Quản Lý Sinh Viên");
-            setDefaultCloseOperation(EXIT_ON_CLOSE);
-            setLayout(new BorderLayout());
+ 
+    public GiaoDienGiangVien(String a,String b)
+    {
+        this.userID=a;
+        this.password=b;
+        unit();
+    }
+    public void unit()
+    {
+        setSize( 800,450);
+        setLocationRelativeTo(null);
+        setTitle("Ứng Dụng Quản Lý Sinh Viên");
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-            Font font = new Font("Arial", Font.BOLD, 25);
-		    JLabel tieuDe=new JLabel("Màn Hình Sinh Viên");
+        Font font = new Font("Arial", Font.BOLD, 25);
+            JLabel tieuDe=new JLabel("Màn Hình Giảng Viên");
             tieuDe.setFont(font);
             JLabel Xinchao=new JLabel("  Xin Chào "+"("+userID+")");
             JLabel DangXuat=new JLabel("<html><u>Đăng Xuất</u></html>");
@@ -74,58 +74,16 @@ public class GiaoDienSinhVien extends JFrame{
         titlePn.setPreferredSize(new Dimension(0,60));
         titlePn.setBackground(new Color(213,232,212));
         titlePn.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
-
         
-        //Trang Chủ
-        JPanel trangChu= new JPanel();
-
-
-        // Xem Điểm-center
-        JPanel xemDiem = new JPanel(new BorderLayout());
-        String columnXemDiem[]={"Mã Học Phần","Tên Học Phần","Số Tín Chỉ","Điểm Giữa Kỳ","%GK","Điểm Cuối Kì","%CK","Điểm Tổng Kết","Kết Quả"};
-        DefaultTableModel modelXemDiem = new DefaultTableModel(columnXemDiem, 0);
-        JTable bangDiem=new JTable(modelXemDiem);
-        bangDiem.getTableHeader().setReorderingAllowed(false);
-        JScrollPane scrollPaneDiem = new JScrollPane(bangDiem);
-        xemDiem.add(scrollPaneDiem,BorderLayout.CENTER);
-
-        // Xem Điểm-bot
-        JLabel diemtb=new JLabel("Điểm Trung Bình Hệ 10: ");
-        JLabel diemtb4=new JLabel("Điểm Trung Bình Hệ 4: ");
-        JLabel tinChi=new JLabel("Số Tín Chỉ Tích Luỹ: ");
-        JPanel TongKet=new JPanel();
-        BoxLayout layout=new BoxLayout(TongKet,BoxLayout.Y_AXIS);
-        TongKet.setLayout(layout);
-        TongKet.add(diemtb);
-        TongKet.add(diemtb4);
-        TongKet.add(tinChi);
-        xemDiem.add(TongKet,BorderLayout.SOUTH);
-
-
-        //DKMH
-        JPanel DKMH = new JPanel(new BorderLayout());
-        JPanel Loc=new JPanel();
-        Loc.setLayout(new BoxLayout(Loc,BoxLayout.X_AXIS));
-        JLabel lb1=new JLabel("Mã Học Phần: ");
-        JTextField tf1=new JTextField();
-        JButton bt1=new JButton("Lọc Học Phần");
-        Loc.add(lb1);
-        Loc.add(tf1);
-        Loc.add(bt1);
-        JPanel chonLoc=new JPanel(new GridLayout(1,2));
-        chonLoc.add(Loc);
-        chonLoc.add(new JPanel());
-        String columnDKMH[]={"Mã Học Phần","Tên Học Phần","Tiết Bắt Đầu","Số Tiết","Giảng Viên","Ngày Bắt Đầu"};
-        DefaultTableModel modelDKMH = new DefaultTableModel(columnDKMH, 0);
-        JTable bangDKMH=new JTable(modelDKMH);
-        bangDKMH.getTableHeader().setReorderingAllowed(false);
-        JScrollPane scrollPaneDKMH = new JScrollPane(bangDKMH);
-        DKMH.add(scrollPaneDKMH,BorderLayout.CENTER);
-        DKMH.add(chonLoc,BorderLayout.NORTH);
+        JPanel trangChupn = new JPanel();
+        JLabel trangChulb = new JLabel("Trang chủ");
         
-        //Xem TKB
+        trangChupn.add(trangChulb);
+
+
+        //lỊCH GIẢNG DẠY
         JPanel xemTKB=new JPanel(new BorderLayout());
-        JLabel TKB=new JLabel("Thời Khóa Biểu");
+        JLabel TKB=new JLabel("Lịch Giảng Dạy");
 	TKB.setAlignmentX(Component.CENTER_ALIGNMENT);
 	TKB.setAlignmentY(Component.CENTER_ALIGNMENT);
 	TKB.setFont(font);
@@ -149,8 +107,7 @@ public class GiaoDienSinhVien extends JFrame{
         xemTKB.add(titlePnTKB,BorderLayout.NORTH);
         xemTKB.add(pnROng,BorderLayout.SOUTH);
 
-
-                                            //Thông Tin Cá Nhân
+        //THÔNG TIN CÁ NHÂN
         JPanel TTCN= new JPanel(new BorderLayout());
         //Top
         JLabel LabelTTCN = new JLabel("Thông Tin Cá Nhân");
@@ -166,11 +123,9 @@ public class GiaoDienSinhVien extends JFrame{
         
         //CENTER
         JPanel pnTTCN= new JPanel(new BorderLayout());
-        JPanel pnTTCN1=new JPanel(new GridLayout(7,2));
+        JPanel pnTTCN1=new JPanel(new GridLayout(8,2));
         
-        pnTTCN1.add(new JLabel("Mã Sinh Viên"));
-        
-		
+        pnTTCN1.add(new JLabel("Mã Giảng Viên"));
         JLabel tfTTCN1 =new JLabel();
 	tfTTCN1.setText(userID);
         pnTTCN1.add(tfTTCN1);
@@ -178,7 +133,7 @@ public class GiaoDienSinhVien extends JFrame{
 		JLabel tfTTCN2 =new JLabel();
 		tfTTCN2.setText(password);
         pnTTCN1.add(tfTTCN2);
-        pnTTCN1.add(new JLabel("Năm Sinh"));
+        pnTTCN1.add(new JLabel("Khoa"));
         JTextField tfTTCN3 =new JTextField();
         pnTTCN1.add(tfTTCN3);
 
@@ -194,7 +149,7 @@ public class GiaoDienSinhVien extends JFrame{
         tfTTCN4.add(nu);
         pnTTCN1.add(tfTTCN4);
 
-        pnTTCN1.add(new JLabel("Dân Tộc"));
+        pnTTCN1.add(new JLabel("Trình Độ"));
         JTextField tfTTCN5 =new JTextField();
         pnTTCN1.add(tfTTCN5);
         pnTTCN1.add(new JLabel("CCCD/CMND"));
@@ -203,6 +158,9 @@ public class GiaoDienSinhVien extends JFrame{
         pnTTCN1.add(new JLabel("Số Điện Thoại"));
         JTextField tfTTCN7 =new JTextField();
         pnTTCN1.add(tfTTCN7);
+        pnTTCN1.add(new JLabel("Email"));
+        JTextField tfTTCN8 =new JTextField();
+        pnTTCN1.add(tfTTCN8);
         pnTTCN.add(pnTTCN1,BorderLayout.CENTER);
         // pnTTCN.add(new JPanel());
         TTCN.add(pnTTCN,BorderLayout.CENTER);
@@ -251,26 +209,23 @@ public class GiaoDienSinhVien extends JFrame{
         JPanel pnlRong2=new JPanel();
         pnlRong2.setPreferredSize(new Dimension(180,0));
         TTCN.add(pnlRong2,BorderLayout.EAST);
+      
+
+        JTabbedPane tabbedPane = new JTabbedPane();
+        tabbedPane.addTab("Trang chủ", trangChupn);
+        tabbedPane.addTab("Lịch trình dạy học", xemTKB);
+        tabbedPane.addTab("Thông tin giảng viên", TTCN);
+
+        JPanel mainPN = new JPanel();
+        mainPN.setLayout(new BorderLayout());
+        mainPN.add(titlePn, BorderLayout.NORTH);
+        mainPN.add(tabbedPane, BorderLayout.CENTER);
 
 
+        add(mainPN);
+       
 
-
-        
-        // Thêm Vô tabbedPane
-        JTabbedPane thanhChon = new JTabbedPane();
-        thanhChon.addTab("Trang Chủ",trangChu);
-        thanhChon.addTab("Xem Điểm", xemDiem);
-        thanhChon.addTab("TKB", xemTKB);
-        thanhChon.addTab("ĐKMH", DKMH);
-        thanhChon.addTab("Thông Tin Cá Nhân", TTCN);
-
-        
-        
-        //Thêm Vào Jframe
-        add(titlePn,BorderLayout.NORTH);
-        add(thanhChon,BorderLayout.CENTER);
-        add(new JPanel(),BorderLayout.WEST);
-        add(new JPanel(),BorderLayout.EAST);
-        add(new JPanel(),BorderLayout.SOUTH);
-	}
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
+    }
 }

@@ -1,26 +1,23 @@
-package com.mycompany.doanjava;
+package doan;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
@@ -38,10 +35,6 @@ public class GiaoDienKhoa extends JFrame{
             this.password=b;
             unitGUI();
         }
-        
-    public GiaoDienKhoa(){
-        unitGUI();
-    }
     
     public void unitGUI(){
         setSize(800,450);
@@ -57,13 +50,13 @@ public class GiaoDienKhoa extends JFrame{
         JLabel tieuDe = new JLabel("Màn hình Khoa");
         tieuDe.setFont(font);
             
-        JLabel xinchao = new JLabel("Xin chào " + "(" + ")");
+        JLabel xinchao = new JLabel("Xin chào " + "(" +userID+ ")");
         JLabel DangXuat = new JLabel("<html><u>Đăng xuất</u></html>");
-            DangXuat.addMouseListener(new MouseAdapter (){
-                @Override
-                public void mouseClicked(MouseEvent e){
-                    new GiaoDienDNSinhVien();
-                    dispose();
+        DangXuat.addMouseListener(new MouseAdapter (){
+            @Override
+            public void mouseClicked(MouseEvent e){
+                new GiaoDienDNSinhVien();
+                dispose();
                 }
             });
             DangXuat.setAlignmentY(Component.RIGHT_ALIGNMENT);
@@ -103,7 +96,7 @@ public class GiaoDienKhoa extends JFrame{
         JPanel chonLoc=new JPanel(new GridLayout(1,2 ));
         chonLoc.add(Loc);
         chonLoc.setPreferredSize(new Dimension(0,40));
-        String columnDSSV[]={"Mã SV","Tên sinh viên","Năm sinh","Giới tính","Dân tộc","CCCD/CMND", "Số điện thoại"};
+        String columnDSSV[]={"Mã SV","Tên sinh viên","Năm sinh","Lớp","Giới tính","Dân tộc","CCCD/CMND", "Số điện thoại"};
         DefaultTableModel modelDSSV = new DefaultTableModel(columnDSSV, 0);
         JTable bangDSSV=new JTable(modelDSSV);
         bangDSSV.getTableHeader().setReorderingAllowed(false);
@@ -117,7 +110,8 @@ public class GiaoDienKhoa extends JFrame{
         JLabel lbl = new JLabel("Lớp");
         JTextField namsinh = new JTextField();
         JLabel lbn = new JLabel("Năm sinh");
-        JTextField gioitinh = new JTextField();
+        String[] genders = {"Nam", "Nữ"};
+        JComboBox<String> gioitinh = new JComboBox<>(genders);
         JLabel lbg = new JLabel("Giới tính: ");
         JTextField dantoc = new JTextField();
         JLabel lbd = new JLabel("Dân tộc");
@@ -156,8 +150,51 @@ public class GiaoDienKhoa extends JFrame{
         pn2.setPreferredSize(new Dimension(0,50));
         JPanel pn3 = new JPanel();
         JButton them = new JButton("Thêm");
+        them.addActionListener(new ActionListener() {
+             public void actionPerformed(ActionEvent e) {
+                String MaSV=msv.getText();
+                String TenSV=tensv.getText();
+                String Lop=lop.getText();
+                String NamSinh=namsinh.getText();
+                String GioiTinh=(String)gioitinh.getSelectedItem();
+                String CCCD=cccd.getText();
+                String Sdt=sdt.getText();
+                String DanToc=dantoc.getText();
+                
+                Object[] rowData = {MaSV, TenSV,Lop,NamSinh,GioiTinh,DanToc,CCCD,Sdt};
+                modelDSSV.addRow(rowData);
+                bangDSSV.setModel(modelDSSV);
+                
+                msv.setText("");
+                tensv.setText("");
+                dantoc.setText("");
+                lop.setText("");
+                gioitinh.setSelectedIndex(0);
+                cccd.setText("");
+                sdt.setText("");
+                dantoc.setText("");
+                namsinh.setText("");
+             }
+        });
         JButton sua = new JButton("Sửa");
+        sua.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+            }
+   
+        });
+        
         JButton xoa = new JButton("Xóa");
+        xoa.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selectedRow = bangDSSV.getSelectedRow();
+                if (selectedRow != -1) {
+                    modelDSSV.removeRow(selectedRow);
+                }
+            }
+        });
         JButton xemdiem = new JButton("Xem điểm");
         pn3.setLayout(new GridLayout(1,4,75,50));
         pn3.add(them);
@@ -172,39 +209,7 @@ public class GiaoDienKhoa extends JFrame{
         pnp.add(pn2);
         pnp.add(pn3);
         pnp.add(chonLoc);
-//        GridBagLayout lo = new GridBagLayout();
-//        pnp.setLayout(lo);
-//        GridBagConstraints gbc = new GridBagConstraints();
-//        gbc.fill = GridBagConstraints.HORIZONTAL;
-//        gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-//        gbc.anchor = GridBagConstraints.LAST_LINE_START;
-//        gbc.gridx = 0;
-//        gbc.gridy = 0;
-//        pnp.add(pn1,gbc);
-//        gbc.fill = GridBagConstraints.HORIZONTAL;
-//        gbc.gridx = 0;
-//        gbc.gridy = 2;
-//        pnp.add(pn2,gbc);
-//        gbc.fill = GridBagConstraints.HORIZONTAL;
-//        gbc.gridx = 0;
-//        gbc.gridy = 4;
-//        pnp.add(pn3,gbc);
-//        gbc.fill = GridBagConstraints.HORIZONTAL;
-//        gbc.gridx = 0;
-//        gbc.gridy = 6;
-//        pnp.add(chonLoc, gbc);
-//        gbc.ipady = 5;
-//        gbc.gridx = 0;
-//        gbc.gridy = 1;
-//        pnp.add(new JLabel(), gbc);
-//        gbc.ipady = 5;
-//        gbc.gridx = 0;
-//        gbc.gridy = 3;
-//        pnp.add(new JLabel(), gbc);
-//        gbc.ipady = 5;
-//        gbc.gridx = 0;
-//        gbc.gridy = 5;
-//        pnp.add(new JLabel(), gbc);
+
         pnp.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
         
         

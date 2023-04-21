@@ -1,4 +1,4 @@
-package com.mycompany.doanjava;
+package doan;
 
 
 public class main {
