@@ -39,6 +39,8 @@ public class GiaoDienDNSinhVien extends JFrame {
 	titlePn.add(tieuDe);
 	titlePn.add(Box.createVerticalGlue());
 	titlePn.setPreferredSize(new Dimension(0,60));
+        titlePn.setBackground(new Color(213,232,212));
+        titlePn.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 
                                         //Center----Màn Hình Đăng Nhập
 		//Lựa Chọn
@@ -50,25 +52,30 @@ public class GiaoDienDNSinhVien extends JFrame {
         group.add(radio2);
         group.add(radio3);
 	JPanel luaChon=new JPanel();
-	luaChon.setLayout(new GridLayout(1,3));
+	luaChon.setLayout(new FlowLayout());
 	luaChon.add(radio1);
 	luaChon.add(radio2);
 	luaChon.add(radio3);
+        luaChon.setPreferredSize(new Dimension(0,30));
 
 		//Khung Đăng Nhập
 	JPanel DangNhap=new JPanel();
 	DangNhap.setLayout(new GridLayout(5,1));
         JLabel tenDN=new JLabel("Tên Đăng Nhập:");
 	khungDN=new JTextField();
-	khungDN.setPreferredSize(new Dimension(0,0));
 	JLabel MatKhau=new JLabel("Mật Khẩu:");
 	khungMK=new JPasswordField();
-	khungMK.setPreferredSize(new Dimension(0,0));
 	DangNhap.add(luaChon);
 	DangNhap.add(tenDN);
 	DangNhap.add(khungDN);
 	DangNhap.add(MatKhau);
 	DangNhap.add(khungMK);
+        JPanel dangNhap=new JPanel();
+        dangNhap.setLayout(new BoxLayout(dangNhap,BoxLayout.Y_AXIS));
+        dangNhap.add(Box.createVerticalGlue());
+	dangNhap.add(DangNhap);
+	dangNhap.add(Box.createVerticalGlue());
+        
 		
 	JLabel pnlRONG1=new JLabel();
 	pnlRONG1.setPreferredSize(new Dimension(100,0));
@@ -114,7 +121,7 @@ public class GiaoDienDNSinhVien extends JFrame {
                 System.out.println("Label clicked!");
             }
         });
-	JPanel btBot=new JPanel(new GridLayout(1,2,10,10));
+	JPanel btBot=new JPanel(new FlowLayout());
 	btBot.add(btDangNhap);
 	btBot.add(label);
 	btBot.setPreferredSize(new Dimension(0,50));
@@ -122,7 +129,7 @@ public class GiaoDienDNSinhVien extends JFrame {
 
 	JPanel panel=new JPanel(new BorderLayout());
 	panel.add(titlePn,BorderLayout.NORTH);
-	panel.add(DangNhap,BorderLayout.CENTER);
+	panel.add(dangNhap,BorderLayout.CENTER);
 	panel.add(pnlRONG1,BorderLayout.EAST);
 	panel.add(pnlRONG2,BorderLayout.WEST);
 	panel.add(btBot,BorderLayout.SOUTH);

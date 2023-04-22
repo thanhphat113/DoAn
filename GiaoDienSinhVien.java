@@ -5,6 +5,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
@@ -189,29 +190,54 @@ public class GiaoDienSinhVien extends JFrame{
 	titleTTCN.add(Box.createVerticalGlue());
 	titleTTCN.add(LabelTTCN);
 	titleTTCN.add(Box.createVerticalGlue());
+        titleTTCN.setPreferredSize(new Dimension(0,50));
         TTCN.add(titleTTCN,BorderLayout.NORTH);
         
         //CENTER
-        JPanel pnTTCN= new JPanel(new BorderLayout());
-        JPanel pnTTCN1=new JPanel(new GridLayout(7,2));
+        JPanel pnTTCN= new JPanel();
+        pnTTCN.setLayout(new BoxLayout(pnTTCN,BoxLayout.Y_AXIS));
+        JPanel pnTTCN1=new JPanel(new GridLayout(7,1));
         
-        pnTTCN1.add(new JLabel("Mã Sinh Viên"));
-        
-		
+        //CENTER-MaSV
+        JPanel MaSV=new JPanel(new FlowLayout(FlowLayout.LEFT,30,2));
+        JLabel maSv=new JLabel("Mã Sinh Viên");
+        maSv.setPreferredSize(new Dimension(100,30));
         JLabel tfTTCN1 =new JLabel();
+        tfTTCN1.setPreferredSize(new Dimension(200,30));
 	tfTTCN1.setText(userID);
-        pnTTCN1.add(tfTTCN1);
-        pnTTCN1.add(new JLabel("Họ Và Tên"));
-		JLabel tfTTCN2 =new JLabel();
-		tfTTCN2.setText(password);
-        pnTTCN1.add(tfTTCN2);
-        pnTTCN1.add(new JLabel("Năm Sinh"));
+        JPanel TT1=new JPanel(new BorderLayout());
+        TT1.add(tfTTCN1,BorderLayout.CENTER);
+        MaSV.add(maSv);
+        MaSV.add(TT1);
+        pnTTCN1.add(MaSV);
+        
+        //CENTER-TenSV
+        JPanel TenSV=new JPanel(new FlowLayout(FlowLayout.LEFT,30,0));
+        JLabel TenSv=new JLabel("Họ Và Tên");
+        TenSv.setPreferredSize(new Dimension(100,30));
+        TenSv.setSize(100,100);
+	JTextField tfTTCN2 =new JTextField();
+        tfTTCN2.setPreferredSize(new Dimension(200,30));
+        TenSV.add(TenSv);
+        TenSV.add(tfTTCN2);
+        pnTTCN1.add(TenSV);
+        
+        //CENTER-Nam Sinh
+        JPanel NamSinh=new JPanel(new FlowLayout(FlowLayout.LEFT,30,0));
+        JLabel namSinh=new JLabel("Năm Sinh");
+        namSinh.setPreferredSize(new Dimension(100,30));
+        namSinh.setSize(100,100);
         JTextField tfTTCN3 =new JTextField();
-        pnTTCN1.add(tfTTCN3);
+        tfTTCN3.setPreferredSize(new Dimension(130,30));
+        NamSinh.add(namSinh);
+        NamSinh.add(tfTTCN3);
+        pnTTCN1.add(NamSinh);
 
-        //Giới Tính
-        pnTTCN1.add(new JLabel("Giới Tính"));
-        JPanel tfTTCN4 =new JPanel(new GridLayout(1,2));
+        //CENTER-Giới Tính
+        JPanel GioiTinh=new JPanel(new FlowLayout(FlowLayout.LEFT,30,0));
+        JLabel gioitinh=new JLabel("Giới Tính");
+        gioitinh.setPreferredSize(new Dimension(100,30));
+        JPanel tfTTCN4 =new JPanel(new FlowLayout());
         JRadioButton nam = new JRadioButton("Nam");
         JRadioButton nu = new JRadioButton("Nữ");
         ButtonGroup genderGroup = new ButtonGroup();
@@ -219,21 +245,46 @@ public class GiaoDienSinhVien extends JFrame{
         genderGroup.add(nu);
         tfTTCN4.add(nam);
         tfTTCN4.add(nu);
-        pnTTCN1.add(tfTTCN4);
+        GioiTinh.add(gioitinh);
+        GioiTinh.add(tfTTCN4);
+        pnTTCN1.add(GioiTinh);
 
-        pnTTCN1.add(new JLabel("Dân Tộc"));
+        //CENTER-Dân Tộc
+        JPanel DanToc=new JPanel(new FlowLayout(FlowLayout.LEFT,30,0));
+        JLabel dantoc=new JLabel("Dân Tộc");
+        dantoc.setPreferredSize(new Dimension(100,30));
         JTextField tfTTCN5 =new JTextField();
-        pnTTCN1.add(tfTTCN5);
-        pnTTCN1.add(new JLabel("CCCD/CMND"));
+        tfTTCN5.setPreferredSize(new Dimension(80,30));
+        DanToc.add(dantoc);
+        DanToc.add(tfTTCN5);
+        pnTTCN1.add(DanToc);
+        
+        //CENTER-CCCD
+        JPanel CCCD=new JPanel(new FlowLayout(FlowLayout.LEFT,30,0));
+        JLabel cccd=new JLabel("CCCD/CMND");
+        cccd.setPreferredSize(new Dimension(100,30));
         JTextField tfTTCN6 =new JTextField();
-        pnTTCN1.add(tfTTCN6);
-        pnTTCN1.add(new JLabel("Số Điện Thoại"));
+        tfTTCN6.setPreferredSize(new Dimension(200,30));
+        CCCD.add(cccd);
+        CCCD.add(tfTTCN6);
+        pnTTCN1.add(CCCD);
+        
+        //CENTER-Sđt
+        JPanel SDT=new JPanel(new FlowLayout(FlowLayout.LEFT,30,0));
+        JLabel sdt=new JLabel("Số Điện Thoại");
+        sdt.setPreferredSize(new Dimension(100,30));
         JTextField tfTTCN7 =new JTextField();
-        pnTTCN1.add(tfTTCN7);
-        pnTTCN.add(pnTTCN1,BorderLayout.CENTER);
-        // pnTTCN.add(new JPanel());
+        tfTTCN7.setPreferredSize(new Dimension(160,30));
+        SDT.add(sdt);
+        SDT.add(tfTTCN7);
+        pnTTCN1.add(SDT);
+        
+//        pnTTCN.add(Box.createVerticalGlue());
+        pnTTCN.add(pnTTCN1);
+//        pnTTCN.add(Box.createVerticalGlue());
         TTCN.add(pnTTCN,BorderLayout.CENTER);
-        JPanel pnlChinhSua = new JPanel(new GridLayout(1,2));
+        
+        JPanel pnlChinhSua = new JPanel(new FlowLayout());
         JButton btSua= new JButton("Xác Nhận Chỉnh Sửa");
         JButton btDoiMK= new JButton("Đổi Mật Khẩu");
         btDoiMK.addActionListener(e -> {
@@ -241,10 +292,10 @@ public class GiaoDienSinhVien extends JFrame{
             fDoiMK.setLayout(new BorderLayout());
             fDoiMK.setSize(450,150);
             
-            JPanel titlePnMK2=new JPanel(new BorderLayout());
+            JPanel titlePnMK2=new JPanel(new FlowLayout());
             titlePnMK2.setPreferredSize(new Dimension(0,50));
             JButton btXacNhan=new JButton("Xác Nhận Thay Đổi");
-            titlePnMK2.add(btXacNhan,BorderLayout.CENTER);
+            titlePnMK2.add(btXacNhan);
             JPanel titlePnMK3=new JPanel();
             titlePnMK3.setPreferredSize(new Dimension(40,0));
             JPanel titlePnMK4=new JPanel();
@@ -257,6 +308,7 @@ public class GiaoDienSinhVien extends JFrame{
             JPasswordField DoiMkTF2= new JPasswordField();
             DoiMK.add(DoiMkTF2);
             
+            
             fDoiMK.add(DoiMK,BorderLayout.CENTER);
             fDoiMK.add(titlePnMK2,BorderLayout.SOUTH);
             fDoiMK.add(titlePnMK3,BorderLayout.WEST);
@@ -268,7 +320,7 @@ public class GiaoDienSinhVien extends JFrame{
 
         pnlChinhSua.add(btSua);
         pnlChinhSua.add(btDoiMK);
-        pnlChinhSua.setPreferredSize(new Dimension(0,50));
+        pnlChinhSua.setPreferredSize(new Dimension(0,40));
         TTCN.add(pnlChinhSua,BorderLayout.SOUTH);
 
         JPanel pnlRong1= new JPanel();
