@@ -10,6 +10,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -21,6 +25,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
@@ -37,7 +42,7 @@ public class GiaoDienQuanLy extends JFrame{
         }
     
     public void unitGUI(){
-        setSize(800,450);
+        setSize(900,500);
         setVisible(true);
         setLocationRelativeTo(null);
         setTitle("Ứng dụng quản lí sinh viên");
@@ -46,6 +51,8 @@ public class GiaoDienQuanLy extends JFrame{
         
         Font font = new Font("Arial", Font.BOLD, 25);
         Font font1 = new Font("Arial", Font.BOLD, 15);
+        
+        Border border = BorderFactory.createLineBorder(Color.BLACK);
         
         JLabel tieuDe = new JLabel("Màn hình Quản Lý");
         tieuDe.setFont(font);
@@ -81,8 +88,67 @@ public class GiaoDienQuanLy extends JFrame{
             titlePn.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
         
         //Trang Chủ==========================================================================================
-        JPanel trangChu= new JPanel();
-            
+        JPanel trangChu= new JPanel(new BorderLayout());
+        JPanel noiDung=new JPanel(new BorderLayout());
+        JTextArea NoiDung=new JTextArea();
+        NoiDung.setEditable(false);
+        try {
+            // Mở file và đọc dữ liệu
+            FileReader fileReader = new FileReader("/Users/lythanhphat9523/NetBeansProjects/DoAnJava/src/doanjava/NoiDung.txt");
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String line = null;
+            while ((line = bufferedReader.readLine()) != null) {
+                // Ghi dữ liệu vào JTextArea
+                NoiDung.append(line + "\n");
+            }
+            bufferedReader.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        noiDung.add(NoiDung,BorderLayout.CENTER);
+        JButton thongbao = new JButton("Thêm thông báo!");
+        thongbao.addActionListener(new ActionListener() {
+             public void actionPerformed(ActionEvent e) {
+                    JFrame f1=new JFrame("Thay Đổi Nội Dung");
+                    f1.setVisible(true);
+                    f1.setSize(500,500);
+                    f1.setLocationRelativeTo(null);
+                    f1.setLayout(new BorderLayout());
+                    JTextArea text=new JTextArea();
+                    text.setText(NoiDung.getText());
+                    
+                    JPanel nut=new JPanel(new GridLayout(1,2));
+                    JButton btXacNhan=new JButton("Xác Nhận");
+                    btXacNhan.addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                            NoiDung.setText(text.getText());
+                            try {
+            FileWriter writer = new FileWriter("/Users/lythanhphat9523/NetBeansProjects/DoAnJava/src/doanjava/NoiDung.txt");
+            writer.write(text.getText());
+            writer.close();
+                } catch (IOException evt) {
+            evt.printStackTrace();
+        }
+                        }
+                    });
+                    JButton btHuy=new JButton("Hủy");
+                    btHuy.addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                            f1.dispose();
+                        }
+                    });
+                    
+                    nut.add(btXacNhan);
+                    nut.add(btHuy);
+                    f1.add(text,BorderLayout.CENTER);
+                    f1.add(nut,BorderLayout.SOUTH);
+                    
+             }
+        });
+        
+        trangChu.add(noiDung,BorderLayout.CENTER);
+        trangChu.add(thongbao,BorderLayout.SOUTH);
         //Danh sách sinh viên==========================================================================================
         JPanel DSSV = new JPanel(new BorderLayout());
         JPanel Loc=new JPanel();
@@ -196,11 +262,13 @@ public class GiaoDienQuanLy extends JFrame{
             }
         });
         JButton xemdiem = new JButton("Xem điểm");
-        pn3.setLayout(new GridLayout(1,4,75,50));
+        JButton xemtkb = new JButton("Xem TKB");
+        pn3.setLayout(new GridLayout(1,5,75,50));
         pn3.add(them);
         pn3.add(sua);
         pn3.add(xoa);
         pn3.add(xemdiem);
+        pn3.add(xemtkb);
         pn3.setPreferredSize(new Dimension(0,55));
         JPanel pnp = new JPanel();
         pnp.setPreferredSize(new Dimension(0,130));
@@ -219,30 +287,76 @@ public class GiaoDienQuanLy extends JFrame{
         
         
         //Danh sách giảng viên
-        JPanel DSGV=new JPanel(new BorderLayout());
-        JLabel GV=new JLabel("Danh sách Giảng viên");
-		GV.setAlignmentX(Component.CENTER_ALIGNMENT);
-		GV.setAlignmentY(Component.CENTER_ALIGNMENT);
-		GV.setFont(font1);
-		JPanel titlePnGV=new JPanel();
-		titlePnGV.setLayout(new BoxLayout(titlePnGV, BoxLayout.Y_AXIS));
-		titlePnGV.add(Box.createVerticalGlue());
-		titlePnGV.add(GV);
-		titlePnGV.add(Box.createVerticalGlue());
-		titlePnGV.setPreferredSize(new Dimension(0,40));
+        JPanel DSGV = new JPanel(new BorderLayout());
+        JPanel locgv=new JPanel();
+        locgv.setLayout(new BoxLayout(locgv,BoxLayout.X_AXIS));
+        JLabel lbgv=new JLabel("Nhập mã giảng viên: ");
+        JTextField jcbgv = new JTextField();
+        JButton btlocgv=new JButton("Tìm kiếm");
+        locgv.add(lbgv);
+        locgv.add(jcbgv);
+        locgv.add(btlocgv);
+        JPanel chonlocgv=new JPanel(new GridLayout(1,2 ));
+        chonlocgv.add(locgv);
+        chonlocgv.setPreferredSize(new Dimension(0,40));
         String columnDSGV[]={"Mã GV","Tên giảng viên","Trình độ","Số điện thoại","Email"};
         DefaultTableModel modelDSGV = new DefaultTableModel(columnDSGV, 0);
-        JTable tableDSGV = new JTable(modelDSGV);
-        tableDSGV.getTableHeader().setReorderingAllowed(false);
-        Border border = BorderFactory.createLineBorder(Color.BLACK);
-
-        tableDSGV.setBorder(border);
-        JPanel pnDSGV=new JPanel();
-        pnDSGV.setPreferredSize(new Dimension(0,25));
-
-        DSGV.add(new JScrollPane(tableDSGV),BorderLayout.CENTER);
-        DSGV.add(titlePnGV,BorderLayout.NORTH);
-        DSGV.add(pnDSGV,BorderLayout.SOUTH);
+        JTable bangDSGV=new JTable(modelDSGV);
+        bangDSGV.getTableHeader().setReorderingAllowed(false);
+        JScrollPane scrollPaneDSGV = new JScrollPane(bangDSGV);
+        JPanel pn4 = new JPanel();
+        JTextField mGV = new JTextField();
+        JLabel lbmg = new JLabel("Mã GV: ");
+        JTextField tenGV = new JTextField();
+        JLabel lbtg = new JLabel("Tên giảng viên: ");
+        JTextField gioitinhgv = new JTextField();
+        JLabel lbgg = new JLabel("Giới tính: ");
+        JTextField trinhdo = new JTextField();
+        JLabel lbtd = new JLabel("Trình độ ");
+        JTextField sdtgv = new JTextField();
+        JLabel lbsg = new JLabel("Số ĐT:");
+        JTextField email = new JTextField();
+        JLabel lbe = new JLabel("Email:");
+        pn4.setLayout(new GridLayout(1,4,10,10));
+        pn4.add(lbmg);
+        pn4.add(mGV);
+        pn4.add(lbtg);
+        pn4.add(tenGV);
+        pn4.add(lbgg);
+        pn4.add(gioitinhgv);
+        pn4.setPreferredSize(new Dimension(0,50));
+        JPanel pn5 = new JPanel();
+        pn5.setLayout(new GridLayout(1,4,10,10));
+        pn5.add(lbtd);
+        pn5.add(trinhdo);
+        pn5.add(lbsg);
+        pn5.add(sdtgv);
+        pn5.add(lbe);
+        pn5.add(email);
+        pn5.setPreferredSize(new Dimension(0,50));
+        JPanel pn6 = new JPanel();
+        JButton themg = new JButton("Thêm");
+        JButton suag = new JButton("Sửa");
+        JButton xoag = new JButton("Xóa");
+        JButton xemlichgiang = new JButton("Xem lịch giảng");
+        pn6.setLayout(new GridLayout(1,4,75,50));
+        pn6.add(themg);
+        pn6.add(suag);
+        pn6.add(xoag);
+        pn6.add(xemlichgiang);
+        pn6.setPreferredSize(new Dimension(0,55));
+        JPanel pn = new JPanel();
+        pn.setPreferredSize(new Dimension(0,130));
+        pn.setLayout(new GridLayout(4,1,0,10));
+        pn.add(pn4);
+        pn.add(pn5);
+        pn.add(pn6);
+        pn.add(chonlocgv);
+        pn.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+        
+        
+        DSGV.add(scrollPaneDSGV,BorderLayout.CENTER);
+        DSGV.add(pn,BorderLayout.NORTH);
         
         //DSMH
         JPanel DSMH=new JPanel(new BorderLayout());

@@ -1,4 +1,4 @@
-package doan;
+package doanjava;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -44,7 +44,7 @@ public class GiaoDienDNSinhVien extends JFrame {
 		//Lựa Chọn
 	radio1 = new JRadioButton("Sinh Viên");
         radio2 = new JRadioButton("Giảng Viên");
-        radio3 = new JRadioButton("Khoa");
+        radio3 = new JRadioButton("Quản Lý");
 	ButtonGroup group = new ButtonGroup();
         group.add(radio1);
         group.add(radio2);
@@ -99,7 +99,7 @@ public class GiaoDienDNSinhVien extends JFrame {
                 } else if (radio3.isSelected()) {
                     if (TK.isEmpty() || MK.isEmpty())	JOptionPane.showMessageDialog(new JFrame(), "Tài khoản hoặc mật khẩu của bạn không hợp lệ!!!");
                     else{
-                        GiaoDienKhoa frGDK=new GiaoDienKhoa(TK,MK);
+                        GiaoDienQuanLy frGDK=new GiaoDienQuanLy(TK,MK);
                         frGDK.setVisible(true);
                         dispose();
                     }
@@ -132,7 +132,6 @@ public class GiaoDienDNSinhVien extends JFrame {
  }
 
 	
-
 
 
 

@@ -1,4 +1,4 @@
-package doan;
+package doanjava;
 
 
 import java.awt.BorderLayout;
@@ -8,13 +8,20 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -23,6 +30,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
@@ -39,7 +47,7 @@ public class GiaoDienGiangVien extends JFrame{
     }
     public void unit()
     {
-        setSize( 800,450);
+        setSize( 900,550);
         setLocationRelativeTo(null);
         setTitle("Ứng Dụng Quản Lý Sinh Viên");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -75,11 +83,90 @@ public class GiaoDienGiangVien extends JFrame{
         titlePn.setBackground(new Color(213,232,212));
         titlePn.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
         
-        JPanel trangChupn = new JPanel();
-        JLabel trangChulb = new JLabel("Trang chủ");
+        //trang Chủ
+        JPanel trangChu= new JPanel(new BorderLayout());
+        JPanel noiDung=new JPanel(new BorderLayout());
+        JTextArea NoiDung=new JTextArea();
+        NoiDung.setEditable(false);
+        try {
+            // Mở file và đọc dữ liệu
+            FileReader fileReader = new FileReader("/Users/lythanhphat9523/NetBeansProjects/DoAnJava/src/doanjava/NoiDung.txt");
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String line = null;
+            while ((line = bufferedReader.readLine()) != null) {
+                // Ghi dữ liệu vào JTextArea
+                NoiDung.append(line + "\n");
+            }
+            bufferedReader.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         
-        trangChupn.add(trangChulb);
+        NoiDung.add(noiDung,BorderLayout.CENTER);
+        trangChu.add(NoiDung,BorderLayout.CENTER);
+        
 
+        //DANH SÁCH ĐẢM NHẬN
+        JPanel PN1 = new JPanel(new GridLayout(1, 2));
+        JPanel PN11 = new JPanel();
+        PN11.setLayout(new BoxLayout(PN11, BoxLayout.X_AXIS));
+        PN11.add(new JLabel("Lựa chọn: "));
+        String[] luaChon = {"Lớp Đảm Nhận", "Lớp Cố Vấn"};
+        JComboBox<String> LuaChon = new JComboBox<>(luaChon);
+        PN11.add(LuaChon);
+        PN1.add(PN11);
+        PN1.add(new JPanel());
+        
+        JPanel centerPanel=new JPanel(new BorderLayout());
+        
+        JPanel danhSachSV = new JPanel(new BorderLayout());
+        
+        // DSSV đảm nhân
+        JPanel quanLySinhVienDN = new JPanel(new BorderLayout());
+        quanLySinhVienDN.setLayout(new BorderLayout());
+        String columnDSSV[]={"STT","Mã Lớp","Mã Môn Học","Số Tín Chỉ","Nhóm","Thứ","Tiết Bắt Đầu", "Số Tiết", "Thời Gian Học", "Phòng Học","DSSV"};
+         DefaultTableModel modelDSSV = new DefaultTableModel(columnDSSV, 0);
+        JTable bangDSSV=new JTable(modelDSSV);
+        bangDSSV.getTableHeader().setReorderingAllowed(false);
+        JScrollPane scrollPaneDSSV = new JScrollPane(bangDSSV);
+        
+        
+        //DSSV Cố Vấn
+        JPanel quanLySinhVienCV = new JPanel(new BorderLayout());
+        quanLySinhVienCV.setLayout(new BorderLayout());
+        String columnDSSVCoVan[] = {"STT", "Mã Lớp", "Tên Lớp", "DSSV"};
+         DefaultTableModel modelDSSVCV = new DefaultTableModel(columnDSSVCoVan, 0);
+        JTable bangDSSVCV=new JTable(modelDSSVCV);
+        bangDSSVCV.getTableHeader().setReorderingAllowed(false);
+        JScrollPane scrollPaneDSSVCV = new JScrollPane(bangDSSVCV);
+        centerPanel.add(scrollPaneDSSV,BorderLayout.CENTER);
+        danhSachSV.add(PN1,BorderLayout.NORTH);
+        danhSachSV.add(centerPanel,BorderLayout.CENTER);
+        
+        
+        //aaaa
+        LuaChon.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String selectedPanel = (String) LuaChon.getSelectedItem();
+                if (selectedPanel.equals("Lớp Đảm Nhận")) {
+                    // Nếu chọn "Panel 1", hiển thị nội dung tương ứng trong JPanel
+                    centerPanel.removeAll();
+                    centerPanel.add(scrollPaneDSSV,BorderLayout.CENTER);
+                    centerPanel.revalidate();
+                    centerPanel.repaint();
+                    
+                } else if (selectedPanel.equals("Lớp Cố Vấn")) {
+                    // Nếu chọn "Panel 2", hiển thị nội dung tương ứng trong JPanel
+                    centerPanel.removeAll();
+                    centerPanel.add(scrollPaneDSSVCV,BorderLayout.CENTER);
+                    centerPanel.revalidate();
+                    centerPanel.repaint();
+                    
+                }
+            }
+        });
+        
 
         //lỊCH GIẢNG DẠY
         JPanel xemTKB=new JPanel(new BorderLayout());
@@ -101,7 +188,7 @@ public class GiaoDienGiangVien extends JFrame{
 
         timetableTable.setBorder(border);
         JPanel pnROng=new JPanel();
-        pnROng.setPreferredSize(new Dimension(0,32));
+        pnROng.setPreferredSize(new Dimension(0,144));
 
         xemTKB.add(new JScrollPane(timetableTable),BorderLayout.CENTER);
         xemTKB.add(titlePnTKB,BorderLayout.NORTH);
@@ -212,7 +299,8 @@ public class GiaoDienGiangVien extends JFrame{
       
 
         JTabbedPane tabbedPane = new JTabbedPane();
-        tabbedPane.addTab("Trang chủ", trangChupn);
+        tabbedPane.addTab("Trang chủ", trangChu);
+        tabbedPane.addTab("Danh Sách Đảm Nhận", danhSachSV);
         tabbedPane.addTab("Lịch trình dạy học", xemTKB);
         tabbedPane.addTab("Thông tin giảng viên", TTCN);
 

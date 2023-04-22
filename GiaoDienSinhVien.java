@@ -1,4 +1,4 @@
-package doan;
+package doanjava;
 
 
 import java.awt.BorderLayout;
@@ -9,6 +9,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -22,6 +24,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
@@ -38,7 +41,7 @@ public class GiaoDienSinhVien extends JFrame{
         }
         
         public void unitGUI(){
-            setSize(800,450);
+            setSize(900,550);
             setLocationRelativeTo(null);
             setTitle("Ứng Dụng Quản Lý Sinh Viên");
             setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -77,7 +80,26 @@ public class GiaoDienSinhVien extends JFrame{
 
         
         //Trang Chủ
-        JPanel trangChu= new JPanel();
+        JPanel trangChu= new JPanel(new BorderLayout());
+        JPanel noiDung=new JPanel(new BorderLayout());
+        JTextArea NoiDung=new JTextArea();
+        NoiDung.setEditable(false);
+        try {
+            // Mở file và đọc dữ liệu
+            FileReader fileReader = new FileReader("/Users/lythanhphat9523/NetBeansProjects/DoAnJava/src/doanjava/NoiDung.txt");
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String line = null;
+            while ((line = bufferedReader.readLine()) != null) {
+                // Ghi dữ liệu vào JTextArea
+                NoiDung.append(line + "\n");
+            }
+            bufferedReader.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        NoiDung.add(noiDung,BorderLayout.CENTER);
+        trangChu.add(NoiDung,BorderLayout.CENTER);
 
 
         // Xem Điểm-center
@@ -140,10 +162,15 @@ public class GiaoDienSinhVien extends JFrame{
         JTable timetableTable = new JTable(modelXemTKB);
         timetableTable.getTableHeader().setReorderingAllowed(false);
         Border border = BorderFactory.createLineBorder(Color.BLACK);
+        
+        JScrollPane scrollpaneTKB= new JScrollPane();
+        scrollpaneTKB.add(timetableTable);
+        scrollpaneTKB.setPreferredSize(new Dimension(0,140));
 
         timetableTable.setBorder(border);
         JPanel pnROng=new JPanel();
-        pnROng.setPreferredSize(new Dimension(0,32));
+        pnROng.setPreferredSize(new Dimension(0,132));
+        
 
         xemTKB.add(new JScrollPane(timetableTable),BorderLayout.CENTER);
         xemTKB.add(titlePnTKB,BorderLayout.NORTH);
