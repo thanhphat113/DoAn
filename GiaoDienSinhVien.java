@@ -34,6 +34,11 @@ public class GiaoDienSinhVien extends JFrame{
     private String userID;
     private String password;
     
+    public GiaoDienSinhVien(){
+            
+            unitGUI();
+        }
+    
    
         public GiaoDienSinhVien(String a,String b){
             this.userID=a;
@@ -47,6 +52,7 @@ public class GiaoDienSinhVien extends JFrame{
             setTitle("Ứng Dụng Quản Lý Sinh Viên");
             setDefaultCloseOperation(EXIT_ON_CLOSE);
             setLayout(new BorderLayout());
+            setVisible(true);
 
             Font font = new Font("Arial", Font.BOLD, 25);
 		    JLabel tieuDe=new JLabel("Màn Hình Sinh Viên");
@@ -143,6 +149,37 @@ public class GiaoDienSinhVien extends JFrame{
         JTable bangDKMH=new JTable(modelDKMH);
         bangDKMH.getTableHeader().setReorderingAllowed(false);
         JScrollPane scrollPaneDKMH = new JScrollPane(bangDKMH);
+        
+        
+        JTable bangXnDKMH= new JTable(modelDKMH);
+        JScrollPane scrollPaneXnDKMH = new JScrollPane(bangXnDKMH);
+        
+        JLabel tieuDeXn=new JLabel("Xác Nhận Đăng Ký Môn");
+	tieuDeXn.setAlignmentX(Component.CENTER_ALIGNMENT);
+	tieuDeXn.setAlignmentY(Component.CENTER_ALIGNMENT);
+	
+	
+	JPanel titlePnXn=new JPanel();
+	titlePnXn.setLayout(new BoxLayout(titlePnXn, BoxLayout.Y_AXIS));
+	titlePnXn.add(Box.createVerticalGlue());
+	titlePnXn.add(tieuDe);
+	titlePnXn.add(Box.createVerticalGlue());
+	titlePnXn.setPreferredSize(new Dimension(0,20));
+        
+        JPanel pnBtXn=new JPanel(new FlowLayout());
+        JButton themXN=new JButton("Xác Nhận");
+        pnBtXn.add(themXN);
+
+        
+        JPanel khungXn=new JPanel(new BorderLayout());
+        khungXn.add(pnBtXn,BorderLayout.SOUTH);
+        khungXn.add(scrollPaneXnDKMH,BorderLayout.CENTER);
+        khungXn.add(tieuDeXn,BorderLayout.NORTH);
+        khungXn.setPreferredSize(new Dimension(0,120));
+        
+        
+        
+        DKMH.add(khungXn,BorderLayout.SOUTH);
         DKMH.add(scrollPaneDKMH,BorderLayout.CENTER);
         DKMH.add(chonLoc,BorderLayout.NORTH);
         
@@ -352,4 +389,8 @@ public class GiaoDienSinhVien extends JFrame{
         add(new JPanel(),BorderLayout.EAST);
         add(new JPanel(),BorderLayout.SOUTH);
 	}
+        
+        public static void main(String[] args){
+            new GiaoDienSinhVien();
+        }
 }
