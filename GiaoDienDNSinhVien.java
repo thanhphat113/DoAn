@@ -114,16 +114,9 @@ public class GiaoDienDNSinhVien extends JFrame {
                 else JOptionPane.showMessageDialog(new JFrame(), "Vui Lòng Chọn Loại Đối Tượng");
             }
         });
-		JLabel label = new JLabel("<html><u>Quên Mật Khẩu</u></html>",JLabel.CENTER);
-        label.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                System.out.println("Label clicked!");
-            }
-        });
+		
 	JPanel btBot=new JPanel(new FlowLayout());
 	btBot.add(btDangNhap);
-	btBot.add(label);
 	btBot.setPreferredSize(new Dimension(0,50));
 
 

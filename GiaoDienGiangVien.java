@@ -64,7 +64,7 @@ public class GiaoDienGiangVien extends JFrame{
                     dispose();
                 }
             });
-        DangXuat.setAlignmentY(Component.RIGHT_ALIGNMENT);
+        DangXuat.setAlignmentX(Component.RIGHT_ALIGNMENT);
         JPanel GioiThieu= new JPanel(new GridLayout(1,2,10,0));
         GioiThieu.add(Xinchao);
         GioiThieu.add(DangXuat);

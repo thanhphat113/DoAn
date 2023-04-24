@@ -17,6 +17,7 @@ import java.io.IOException;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -66,7 +67,7 @@ public class GiaoDienQuanLy extends JFrame{
                 dispose();
                 }
             });
-            DangXuat.setAlignmentY(Component.RIGHT_ALIGNMENT);
+            DangXuat.setAlignmentX(Component.RIGHT_ALIGNMENT);
                 
         JPanel GioiThieu = new JPanel(new GridLayout(1,2,10,0));
             GioiThieu.add(xinchao);
@@ -149,8 +150,10 @@ public class GiaoDienQuanLy extends JFrame{
         
         trangChu.add(noiDung,BorderLayout.CENTER);
         trangChu.add(thongbao,BorderLayout.SOUTH);
+        
+        
         //Danh sách sinh viên==========================================================================================
-        JPanel DSSV = new JPanel(new BorderLayout());
+        JPanel DSSV = new JPanel(new BorderLayout()); 
         JPanel Loc=new JPanel();
         Loc.setLayout(new BoxLayout(Loc,BoxLayout.X_AXIS));
         JLabel lb1=new JLabel("Chọn lớp:");
@@ -216,6 +219,8 @@ public class GiaoDienQuanLy extends JFrame{
         pn2.setPreferredSize(new Dimension(0,50));
         JPanel pn3 = new JPanel();
         JButton them = new JButton("Thêm");
+        
+        
         them.addActionListener(new ActionListener() {
              public void actionPerformed(ActionEvent e) {
                 String MaSV=msv.getText();

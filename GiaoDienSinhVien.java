@@ -55,7 +55,7 @@ public class GiaoDienSinhVien extends JFrame{
             setVisible(true);
 
             Font font = new Font("Arial", Font.BOLD, 25);
-		    JLabel tieuDe=new JLabel("Màn Hình Sinh Viên");
+            JLabel tieuDe=new JLabel("Màn Hình Sinh Viên");
             tieuDe.setFont(font);
             JLabel Xinchao=new JLabel("  Xin Chào "+"("+userID+")");
             JLabel DangXuat=new JLabel("<html><u>Đăng Xuất</u></html>");
@@ -162,7 +162,7 @@ public class GiaoDienSinhVien extends JFrame{
 	JPanel titlePnXn=new JPanel();
 	titlePnXn.setLayout(new BoxLayout(titlePnXn, BoxLayout.Y_AXIS));
 	titlePnXn.add(Box.createVerticalGlue());
-	titlePnXn.add(tieuDe);
+	titlePnXn.add(tieuDeXn);
 	titlePnXn.add(Box.createVerticalGlue());
 	titlePnXn.setPreferredSize(new Dimension(0,20));
         
