@@ -1,4 +1,4 @@
-package doan;
+package GUI;
 
 
 import java.awt.BorderLayout;
@@ -212,21 +212,20 @@ public class GiaoDienGiangVien extends JFrame {
         JPanel pnTTCN1 = new JPanel(new GridLayout(8, 1));
 
          //CENTER-MaGV
-         JPanel MaGV = new JPanel(new FlowLayout(FlowLayout.LEFT, 30, 2));
+         JPanel MaGV = new JPanel();
         JLabel maGv = new JLabel("Mã Giảng Viên");
         maGv.setPreferredSize(new Dimension(100, 30));
         JLabel tfTTCN1 = new JLabel();
         tfTTCN1.setPreferredSize(new Dimension(200, 30));
         tfTTCN1.setText(userID);
-        JPanel TT1 = new JPanel(new BorderLayout());
-        TT1.add(tfTTCN1, BorderLayout.CENTER);
+        
         MaGV.add(maGv);
-        MaGV.add(TT1);
+        MaGV.add(tfTTCN1);
         pnTTCN1.add(MaGV);
         
         
         //CENTER-TenGV
-        JPanel TenGV = new JPanel(new FlowLayout(FlowLayout.LEFT, 30, 0));
+        JPanel TenGV = new JPanel(new FlowLayout());
         JLabel TenGv = new JLabel("Họ Và Tên");
         TenGv.setPreferredSize(new Dimension(100, 30));
         JTextField tfTTCN2 = new JTextField();
@@ -237,41 +236,41 @@ public class GiaoDienGiangVien extends JFrame {
         
         
         //CENTER-KHOA
-        JPanel KHOA = new JPanel(new FlowLayout(FlowLayout.LEFT, 30, 0));
+        JPanel KHOA = new JPanel(new FlowLayout());
         JLabel khoa = new JLabel("Khoa");
         khoa.setPreferredSize(new Dimension(100, 30));
         JTextField tfTTCN3 = new JTextField();
-        tfTTCN3.setPreferredSize(new Dimension(130, 30));
+        tfTTCN3.setPreferredSize(new Dimension(200, 30));
         KHOA.add(khoa);
         KHOA.add(tfTTCN3);
         pnTTCN1.add(KHOA);
         
 
         //CENTER-Giới Tính
-        JPanel GioiTinh = new JPanel(new FlowLayout(FlowLayout.LEFT, 30, 0));
+        JPanel GioiTinh = new JPanel(new FlowLayout());
         JLabel gioitinh = new JLabel("Giới Tính");
         String[] luaChonTTCN = {"Nam", "Nữ"};
         JComboBox<String> LuaChonTTCN = new JComboBox<>(luaChonTTCN);
         gioitinh.setPreferredSize(new Dimension(100, 30));
-        LuaChonTTCN.setPreferredSize(new Dimension(130, 30));
+        LuaChonTTCN.setPreferredSize(new Dimension(200, 30));
         GioiTinh.add(gioitinh);
         GioiTinh.add(LuaChonTTCN);
         pnTTCN1.add(GioiTinh);
         
         
         //CENTER-Trình Độ
-        JPanel TRINHDO = new JPanel(new FlowLayout(FlowLayout.LEFT, 30, 0));
+        JPanel TRINHDO = new JPanel(new FlowLayout());
         JLabel trinhdo = new JLabel("Trình Độ");
         trinhdo.setPreferredSize(new Dimension(100, 30));
         JTextField tfTTCN4 = new JTextField();
-        tfTTCN4.setPreferredSize(new Dimension(130, 30));
+        tfTTCN4.setPreferredSize(new Dimension(200, 30));
         TRINHDO.add(trinhdo);
         TRINHDO.add(tfTTCN4);
         pnTTCN1.add(TRINHDO);
         
         
                 //CENTER-CCCD
-        JPanel CCCD = new JPanel(new FlowLayout(FlowLayout.LEFT, 30, 0));
+        JPanel CCCD = new JPanel(new FlowLayout());
         JLabel cccd = new JLabel("CCCD/CMND");
         cccd.setPreferredSize(new Dimension(100, 30));
         JTextField tfTTCN5 = new JTextField();
@@ -281,21 +280,21 @@ public class GiaoDienGiangVien extends JFrame {
         pnTTCN1.add(CCCD);
 
         //CENTER-Sđt
-        JPanel SDT = new JPanel(new FlowLayout(FlowLayout.LEFT, 30, 0));
+        JPanel SDT = new JPanel(new FlowLayout());
         JLabel sdt = new JLabel("Số Điện Thoại");
         sdt.setPreferredSize(new Dimension(100, 30));
         JTextField tfTTCN6 = new JTextField();
-        tfTTCN6.setPreferredSize(new Dimension(160, 30));
+        tfTTCN6.setPreferredSize(new Dimension(200, 30));
         SDT.add(sdt);
         SDT.add(tfTTCN6);
         pnTTCN1.add(SDT);
         
         //CENTER-EMAIL
-        JPanel EMAIL = new JPanel(new FlowLayout(FlowLayout.LEFT, 30, 0));
+        JPanel EMAIL = new JPanel(new FlowLayout());
         JLabel email = new JLabel("Email");
         email.setPreferredSize(new Dimension(100, 30));
         JTextField tfTTCN7 = new JTextField();
-        tfTTCN7.setPreferredSize(new Dimension(160, 30));
+        tfTTCN7.setPreferredSize(new Dimension(200, 30));
         EMAIL.add(email);
         EMAIL.add(tfTTCN7);
         pnTTCN1.add(EMAIL);

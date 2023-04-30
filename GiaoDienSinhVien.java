@@ -1,4 +1,4 @@
-package doan;
+package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -17,6 +17,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -227,20 +228,18 @@ public class GiaoDienSinhVien extends JFrame {
         JPanel pnTTCN1 = new JPanel(new GridLayout(7, 1));
 
         //CENTER-MaSV
-        JPanel MaSV = new JPanel(new FlowLayout(FlowLayout.LEFT, 30, 2));
+        JPanel MaSV = new JPanel(new FlowLayout());
         JLabel maSv = new JLabel("Mã Sinh Viên");
         maSv.setPreferredSize(new Dimension(100, 30));
         JLabel tfTTCN1 = new JLabel();
         tfTTCN1.setPreferredSize(new Dimension(200, 30));
         tfTTCN1.setText(userID);
-        JPanel TT1 = new JPanel(new BorderLayout());
-        TT1.add(tfTTCN1, BorderLayout.CENTER);
         MaSV.add(maSv);
-        MaSV.add(TT1);
+        MaSV.add(tfTTCN1);
         pnTTCN1.add(MaSV);
 
         //CENTER-TenSV
-        JPanel TenSV = new JPanel(new FlowLayout(FlowLayout.LEFT, 30, 0));
+        JPanel TenSV = new JPanel(new FlowLayout());
         JLabel TenSv = new JLabel("Họ Và Tên");
         TenSv.setPreferredSize(new Dimension(100, 30));
         TenSv.setSize(100, 100);
@@ -251,44 +250,39 @@ public class GiaoDienSinhVien extends JFrame {
         pnTTCN1.add(TenSV);
 
         //CENTER-Nam Sinh
-        JPanel NamSinh = new JPanel(new FlowLayout(FlowLayout.LEFT, 30, 0));
+        JPanel NamSinh = new JPanel(new FlowLayout());
         JLabel namSinh = new JLabel("Năm Sinh");
         namSinh.setPreferredSize(new Dimension(100, 30));
         namSinh.setSize(100, 100);
         JTextField tfTTCN3 = new JTextField();
-        tfTTCN3.setPreferredSize(new Dimension(130, 30));
+        tfTTCN3.setPreferredSize(new Dimension(200, 30));
         NamSinh.add(namSinh);
         NamSinh.add(tfTTCN3);
         pnTTCN1.add(NamSinh);
 
         //CENTER-Giới Tính
-        JPanel GioiTinh = new JPanel(new FlowLayout(FlowLayout.LEFT, 30, 0));
+         JPanel GioiTinh = new JPanel(new FlowLayout());
         JLabel gioitinh = new JLabel("Giới Tính");
+        String[] luaChonTTCN = {"Nam", "Nữ"};
+        JComboBox<String> LuaChonTTCN = new JComboBox<>(luaChonTTCN);
         gioitinh.setPreferredSize(new Dimension(100, 30));
-        JPanel tfTTCN4 = new JPanel(new FlowLayout());
-        JRadioButton nam = new JRadioButton("Nam");
-        JRadioButton nu = new JRadioButton("Nữ");
-        ButtonGroup genderGroup = new ButtonGroup();
-        genderGroup.add(nam);
-        genderGroup.add(nu);
-        tfTTCN4.add(nam);
-        tfTTCN4.add(nu);
+        LuaChonTTCN.setPreferredSize(new Dimension(200, 30));
         GioiTinh.add(gioitinh);
-        GioiTinh.add(tfTTCN4);
+        GioiTinh.add(LuaChonTTCN);
         pnTTCN1.add(GioiTinh);
 
         //CENTER-Dân Tộc
-        JPanel DanToc = new JPanel(new FlowLayout(FlowLayout.LEFT, 30, 0));
+        JPanel DanToc = new JPanel(new FlowLayout());
         JLabel dantoc = new JLabel("Dân Tộc");
         dantoc.setPreferredSize(new Dimension(100, 30));
         JTextField tfTTCN5 = new JTextField();
-        tfTTCN5.setPreferredSize(new Dimension(80, 30));
+        tfTTCN5.setPreferredSize(new Dimension(200, 30));
         DanToc.add(dantoc);
         DanToc.add(tfTTCN5);
         pnTTCN1.add(DanToc);
 
         //CENTER-CCCD
-        JPanel CCCD = new JPanel(new FlowLayout(FlowLayout.LEFT, 30, 0));
+        JPanel CCCD = new JPanel(new FlowLayout());
         JLabel cccd = new JLabel("CCCD/CMND");
         cccd.setPreferredSize(new Dimension(100, 30));
         JTextField tfTTCN6 = new JTextField();
@@ -298,11 +292,11 @@ public class GiaoDienSinhVien extends JFrame {
         pnTTCN1.add(CCCD);
 
         //CENTER-Sđt
-        JPanel SDT = new JPanel(new FlowLayout(FlowLayout.LEFT, 30, 0));
+        JPanel SDT = new JPanel(new FlowLayout());
         JLabel sdt = new JLabel("Số Điện Thoại");
         sdt.setPreferredSize(new Dimension(100, 30));
         JTextField tfTTCN7 = new JTextField();
-        tfTTCN7.setPreferredSize(new Dimension(160, 30));
+        tfTTCN7.setPreferredSize(new Dimension(200, 30));
         SDT.add(sdt);
         SDT.add(tfTTCN7);
         pnTTCN1.add(SDT);
