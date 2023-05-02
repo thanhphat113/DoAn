@@ -1,5 +1,7 @@
 package GUI;
 
+import DAO.SinhVienDAO;
+import DTO.SinhVien;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -48,7 +50,7 @@ public class GiaoDienSinhVien extends JFrame {
     }
 
     public void unitGUI() {
-        setSize(900, 550);
+        setSize(900, 650);
         setLocationRelativeTo(null);
         setTitle("Ứng Dụng Quản Lý Sinh Viên");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -94,7 +96,7 @@ public class GiaoDienSinhVien extends JFrame {
         NoiDung.setEditable(false);
         try {
             // Mở file và đọc dữ liệu
-            FileReader fileReader = new FileReader(".\\src\\doan\\NoiDung.txt");
+            FileReader fileReader = new FileReader("./NoiDung.txt");
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String line = null;
             while ((line = bufferedReader.readLine()) != null) {
@@ -208,6 +210,8 @@ public class GiaoDienSinhVien extends JFrame {
         xemTKB.add(pnROng, BorderLayout.SOUTH);
 
         //Thông Tin Cá Nhân
+        SinhVien sv= new SinhVien();
+        sv=SinhVienDAO.selectById(userID);
         JPanel TTCN = new JPanel(new BorderLayout());
         //Top
         JLabel LabelTTCN = new JLabel("Thông Tin Cá Nhân");
@@ -225,7 +229,7 @@ public class GiaoDienSinhVien extends JFrame {
         //CENTER
         JPanel pnTTCN = new JPanel();
         pnTTCN.setLayout(new BoxLayout(pnTTCN, BoxLayout.Y_AXIS));
-        JPanel pnTTCN1 = new JPanel(new GridLayout(7, 1));
+        JPanel pnTTCN1 = new JPanel(new GridLayout(9, 1));
 
         //CENTER-MaSV
         JPanel MaSV = new JPanel(new FlowLayout());
@@ -244,6 +248,8 @@ public class GiaoDienSinhVien extends JFrame {
         TenSv.setPreferredSize(new Dimension(100, 30));
         TenSv.setSize(100, 100);
         JTextField tfTTCN2 = new JTextField();
+        tfTTCN2.setEditable(false);
+        tfTTCN2.setText(sv.getTenSinhVien());
         tfTTCN2.setPreferredSize(new Dimension(200, 30));
         TenSV.add(TenSv);
         TenSV.add(tfTTCN2);
@@ -255,6 +261,8 @@ public class GiaoDienSinhVien extends JFrame {
         namSinh.setPreferredSize(new Dimension(100, 30));
         namSinh.setSize(100, 100);
         JTextField tfTTCN3 = new JTextField();
+        tfTTCN3.setEditable(false);
+        tfTTCN3.setText(sv.getNamSinh());
         tfTTCN3.setPreferredSize(new Dimension(200, 30));
         NamSinh.add(namSinh);
         NamSinh.add(tfTTCN3);
@@ -267,6 +275,7 @@ public class GiaoDienSinhVien extends JFrame {
         JComboBox<String> LuaChonTTCN = new JComboBox<>(luaChonTTCN);
         gioitinh.setPreferredSize(new Dimension(100, 30));
         LuaChonTTCN.setPreferredSize(new Dimension(200, 30));
+        LuaChonTTCN.setEnabled(false);
         GioiTinh.add(gioitinh);
         GioiTinh.add(LuaChonTTCN);
         pnTTCN1.add(GioiTinh);
@@ -276,6 +285,8 @@ public class GiaoDienSinhVien extends JFrame {
         JLabel dantoc = new JLabel("Dân Tộc");
         dantoc.setPreferredSize(new Dimension(100, 30));
         JTextField tfTTCN5 = new JTextField();
+        tfTTCN5.setText(sv.getDanToc());
+        tfTTCN5.setEditable(false);
         tfTTCN5.setPreferredSize(new Dimension(200, 30));
         DanToc.add(dantoc);
         DanToc.add(tfTTCN5);
@@ -286,20 +297,49 @@ public class GiaoDienSinhVien extends JFrame {
         JLabel cccd = new JLabel("CCCD/CMND");
         cccd.setPreferredSize(new Dimension(100, 30));
         JTextField tfTTCN6 = new JTextField();
+        tfTTCN6.setText(sv.getCCCD());
+        tfTTCN6.setEditable(false);
         tfTTCN6.setPreferredSize(new Dimension(200, 30));
         CCCD.add(cccd);
         CCCD.add(tfTTCN6);
         pnTTCN1.add(CCCD);
+        
 
         //CENTER-Sđt
         JPanel SDT = new JPanel(new FlowLayout());
         JLabel sdt = new JLabel("Số Điện Thoại");
         sdt.setPreferredSize(new Dimension(100, 30));
         JTextField tfTTCN7 = new JTextField();
+        tfTTCN7.setText(sv.getSoDienThoai());
+        tfTTCN7.setEditable(false);
         tfTTCN7.setPreferredSize(new Dimension(200, 30));
         SDT.add(sdt);
         SDT.add(tfTTCN7);
         pnTTCN1.add(SDT);
+        
+        //Mã Khoa
+        JPanel KHOA = new JPanel(new FlowLayout());
+        JLabel khoa = new JLabel("Mã Khoa");
+        khoa.setPreferredSize(new Dimension(100, 30));
+        JTextField tfTTCN8 = new JTextField();
+        tfTTCN8.setEditable(false);
+        tfTTCN8.setText(sv.getMaKhoa());
+        tfTTCN8.setPreferredSize(new Dimension(200, 30));
+        KHOA.add(khoa);
+        KHOA.add(tfTTCN8);
+        pnTTCN1.add(KHOA);
+        
+        //Mã Lớp
+        JPanel LOP = new JPanel(new FlowLayout());
+        JLabel lop = new JLabel("Mã Lớp");
+        lop.setPreferredSize(new Dimension(100, 30));
+        JTextField tfTTCN9 = new JTextField();
+        tfTTCN9.setEditable(false);
+        tfTTCN9.setText(sv.getMaLop());
+        tfTTCN9.setPreferredSize(new Dimension(200, 30));
+        LOP.add(lop);
+        LOP.add(tfTTCN9);
+        pnTTCN1.add(LOP);
 
 //        pnTTCN.add(Box.createVerticalGlue());
         pnTTCN.add(pnTTCN1);

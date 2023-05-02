@@ -10,8 +10,6 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
@@ -19,7 +17,6 @@ import java.io.FileReader;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -27,7 +24,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
@@ -48,7 +44,7 @@ public class GiaoDienGiangVien extends JFrame {
     }
 
     public void unit() {
-        setSize(900, 550);
+        setSize(950, 500);
         setLocationRelativeTo(null);
         setTitle("Ứng Dụng Quản Lý Sinh Viên");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -92,7 +88,7 @@ public class GiaoDienGiangVien extends JFrame {
         NoiDung.setEditable(false);
         try {
             // Mở file và đọc dữ liệu
-            FileReader fileReader = new FileReader(".\\src\\doan\\NoiDung.txt");
+            FileReader fileReader = new FileReader("./NoiDung.txt");
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String line = null;
             while ((line = bufferedReader.readLine()) != null) {
