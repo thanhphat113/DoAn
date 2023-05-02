@@ -206,7 +206,7 @@ public class GiaoDienQuanLy extends JFrame {
         String[] TIMKIEM = {"Tất Cả","Mã Sinh Viên","Tên Sinh Viên", "Năm Sinh","Giới Tính","Dân Tộc","CCCD","Số Điện Thoại","Mã Khoa","Mã Lớp"};
         JComboBox<String> DULIEU = new JComboBox<>(TIMKIEM);
         JTextField jcb1 = new JTextField();
-        jcb1.setPreferredSize(new Dimension(40,100));
+     
         JButton bt1 = new JButton("Lọc >>");
         bt1.addActionListener(new ActionListener() {
             @Override
@@ -303,17 +303,14 @@ public class GiaoDienQuanLy extends JFrame {
         pn1.add(lop);
         pn1.add(lbk);
         pn1.add(khoa);
-        
-        
-
         pn1.setPreferredSize(new Dimension(0, 50));
+        
+        
         JPanel pn2 = new JPanel();
         pn2.setLayout(new FlowLayout());
-        
         pn2.add(lbn);
         pn2.add(ngaysinh);
         pn2.add(lbd);
-        
         pn2.add(dantoc);
         pn2.add(lbc);
         pn2.add(cccd);
@@ -570,17 +567,16 @@ public class GiaoDienQuanLy extends JFrame {
         
         JButton xemdiem = new JButton("Xem điểm");
         JButton xemtkb = new JButton("Xem TKB");
-        pn3.setLayout(new GridLayout(1, 6, 75, 50));
+        pn3.setLayout(new FlowLayout());
         pn3.add(them);
         pn3.add(sua);
         pn3.add(xoa);
         pn3.add(timKiem);
         pn3.add(xemdiem);
         pn3.add(xemtkb);
-        pn3.setPreferredSize(new Dimension(0, 55));
+        pn3.setPreferredSize(new Dimension(0, 30));
         JPanel pnp = new JPanel();
-        pnp.setPreferredSize(new Dimension(0, 130));
-//        pnp.setLayout(new GridLayout(4, 1, 0, 10));
+        pnp.setPreferredSize(new Dimension(0, 150));
         pnp.setLayout(new BoxLayout(pnp, BoxLayout.Y_AXIS));
         pnp.add(pn1);
         pnp.add(pn2);
@@ -596,27 +592,35 @@ public class GiaoDienQuanLy extends JFrame {
         JPanel DSGV = new JPanel(new BorderLayout());
         JPanel locgv = new JPanel();
         locgv.setLayout(new BoxLayout(locgv, BoxLayout.X_AXIS));
-        JLabel lbgv = new JLabel("Nhập mã giảng viên: ");
+        
+        //Tìm Kiếm GV        
+        String[] TIMKIEMGV = {"Tất Cả","Mã Giảng Viên","Tên Giảng Viên", "Năm Sinh","Giới Tính","Trình Độ","Số Điện Thoại","Email"};
+        JComboBox<String> DULIEUGV = new JComboBox<>(TIMKIEMGV);
+        
+        
         JTextField jcbgv = new JTextField();
-        JButton btlocgv = new JButton("Tìm kiếm");
-        locgv.add(lbgv);
+        JButton btlocgv = new JButton("Lọc >>");
+        locgv.add(DULIEUGV);
         locgv.add(jcbgv);
         locgv.add(btlocgv);
         JPanel chonlocgv = new JPanel(new GridLayout(1, 2));
         chonlocgv.add(locgv);
-        chonlocgv.setPreferredSize(new Dimension(0, 40));
+        chonlocgv.add(new JPanel());
         String columnDSGV[] = {"Mã GV", "Tên giảng viên", "Trình độ", "Số điện thoại", "Email"};
         DefaultTableModel modelDSGV = new DefaultTableModel(columnDSGV, 0);
         JTable bangDSGV = new JTable(modelDSGV);
         bangDSGV.getTableHeader().setReorderingAllowed(false);
         JScrollPane scrollPaneDSGV = new JScrollPane(bangDSGV);
         JPanel pn4 = new JPanel();
+        
+        
         JTextField mGV = new JTextField();
         JLabel lbmg = new JLabel("Mã GV: ");
         JTextField tenGV = new JTextField();
         JLabel lbtg = new JLabel("Tên giảng viên: ");
-        JTextField gioitinhgv = new JTextField();
-        JLabel lbgg = new JLabel("Giới tính: ");
+        String[] gendersGV = {"Nam", "Nữ"};
+        JComboBox<String> gioitinhGV = new JComboBox<>(genders);
+        JLabel lbgGV = new JLabel("Giới tính: ");
         JTextField trinhdo = new JTextField();
         JLabel lbtd = new JLabel("Trình độ ");
         JTextField sdtgv = new JTextField();
@@ -628,8 +632,8 @@ public class GiaoDienQuanLy extends JFrame {
         pn4.add(mGV);
         pn4.add(lbtg);
         pn4.add(tenGV);
-        pn4.add(lbgg);
-        pn4.add(gioitinhgv);
+        pn4.add(lbgGV);
+        pn4.add(gioitinhGV);
         pn4.setPreferredSize(new Dimension(0, 50));
         JPanel pn5 = new JPanel();
         pn5.setLayout(new GridLayout(1, 4, 10, 10));
@@ -645,14 +649,14 @@ public class GiaoDienQuanLy extends JFrame {
         JButton suag = new JButton("Sửa");
         JButton xoag = new JButton("Xóa");
         JButton xemlichgiang = new JButton("Xem lịch giảng");
-        pn6.setLayout(new GridLayout(1, 4, 75, 50));
+        pn6.setLayout(new FlowLayout());
         pn6.add(themg);
         pn6.add(suag);
         pn6.add(xoag);
         pn6.add(xemlichgiang);
         pn6.setPreferredSize(new Dimension(0, 55));
         JPanel pn = new JPanel();
-        pn.setPreferredSize(new Dimension(0, 130));
+        pn.setPreferredSize(new Dimension(0, 150));
         pn.setLayout(new GridLayout(4, 1, 0, 10));
         pn.add(pn4);
         pn.add(pn5);
@@ -664,27 +668,53 @@ public class GiaoDienQuanLy extends JFrame {
         DSGV.add(pn, BorderLayout.NORTH);
 
         //DSMH
+        JPanel locmh = new JPanel();
+        locmh.setLayout(new BoxLayout(locmh, BoxLayout.X_AXIS));
+        String[] TIMKIEMMH = {"Tất Cả","Mã Môn Học","Mã Giảng Viên", "Tiết Bắt Đầu","Ngày Bắt Đầu","Ngày Kết Thúc"};
+        JComboBox<String> DULIEUMH = new JComboBox<>(TIMKIEMMH);
+        
+        JTextField jcbmh = new JTextField();
+        JButton btlocmh = new JButton("Lọc >>");
+        locmh.add(DULIEUMH);
+        locmh.add(jcbmh);
+        locmh.add(btlocmh);
+        JPanel chonlocmh = new JPanel(new GridLayout(1, 2));
+        chonlocmh.add(locmh);
+        chonlocmh.add(new JPanel());
+        
         JPanel DSMH = new JPanel(new BorderLayout());
-        String columnDSMH[] = {"Mã MH", "Tên môn học", "Tiết bắt đầu", "Giảng Viên", "Ngày bắt đầu"};
+        String columnDSMH[] = {"Mã MH", "Tên môn học", "Tiết bắt đầu", "Mã Giảng Viên", "Ngày bắt đầu","Ngày Kết Thúc"};
         DefaultTableModel modelDSMH = new DefaultTableModel(columnDSMH, 0);
         JTable bangDSMH = new JTable(modelDSMH);
         bangDSMH.getTableHeader().setReorderingAllowed(false);
         JScrollPane scrollPaneDSMH = new JScrollPane(bangDSMH);
         JPanel pn7 = new JPanel();
         JTextField mMH = new JTextField();
+        mMH.setPreferredSize(new Dimension(120, 30));
         JLabel lbmmh = new JLabel("Mã MH: ");
+        lbmmh.setPreferredSize(new Dimension(60, 30));
         JTextField tenMH = new JTextField();
+        tenMH.setPreferredSize(new Dimension(170, 30));
         JLabel lbtm = new JLabel("Tên môn học: ");
         String[] tbd = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
         JComboBox<String> tietbatdau = new JComboBox<>(tbd);
         JLabel lbtbd = new JLabel("Tiết bắt đầu: ");
-        JComboBox<String> sotiet = new JComboBox<>(tbd);
+        String[] soTiet = {"1", "2", "3", "4"};
+        JComboBox<String> sotiet = new JComboBox<>(soTiet);
         JLabel lbst = new JLabel("Số tiết: ");
         JTextField giangvien  = new JTextField();
-        JLabel lbtgv = new JLabel("Giảng viên ");
-        JTextField ngaybd = new JTextField();
-        JLabel lbnbd = new JLabel("Ngày bắt đầu: ");
-        pn7.setLayout(new GridLayout(1, 4, 10, 10));
+        giangvien.setPreferredSize(new Dimension(100, 30));
+        JLabel lbtgv = new JLabel("Mã Giảng viên ");
+        
+        JDatePicker ngayBatDau = new JDateComponentFactory().createJDatePicker(dateModel);
+        ngayBatDau.setTextEditable(false); // Cho phép nhập ngày tháng năm bằng tay
+        ngayBatDau.setShowYearButtons(true); // Hiển thị nút điều khiển chọn năm
+        ngayBatDau.setButtonFocusable(true); // Cho phép focus vào nút điều khiển
+        JPanel ngayBD=new JPanel(new BorderLayout());
+        ngayBD.add((Component) ngayBatDau,BorderLayout.CENTER);
+        
+        JLabel lbnbd = new JLabel("Ngày bắt đầu:");
+        pn7.setLayout(new FlowLayout());
         pn7.add(lbmmh);
         pn7.add(mMH);
         pn7.add(lbtm);
@@ -693,29 +723,30 @@ public class GiaoDienQuanLy extends JFrame {
         pn7.add(tietbatdau);
         pn7.setPreferredSize(new Dimension(0, 50));
         JPanel pn8 = new JPanel();
-        pn8.setLayout(new GridLayout(1, 4, 10, 10));
+        pn8.setLayout(new FlowLayout());
         pn8.add(lbst);
         pn8.add(sotiet);
         pn8.add(lbtgv);
         pn8.add(giangvien);
         pn8.add(lbnbd);
-        pn8.add(ngaybd);
-        pn8.setPreferredSize(new Dimension(0, 80));
+        pn8.add(ngayBD);
+        pn8.setPreferredSize(new Dimension(0, 50));
         JPanel pn9 = new JPanel();
         JButton t = new JButton("Thêm");
         JButton s = new JButton("Sửa");
         JButton x = new JButton("Xóa");
-        pn9.setLayout(new GridLayout(1, 3, 75, 50));
+        pn9.setLayout(new FlowLayout());
         pn9.add(t);
         pn9.add(s);
         pn9.add(x);
         pn9.setPreferredSize(new Dimension(0, 55));
         JPanel pnmh = new JPanel();
-        pnmh.setPreferredSize(new Dimension(0, 85));
-        pnmh.setLayout(new GridLayout(3, 1, 0, 10));
+        pnmh.setPreferredSize(new Dimension(0, 150));
+        pnmh.setLayout(new BoxLayout(pnmh,BoxLayout.Y_AXIS));
         pnmh.add(pn7);
         pnmh.add(pn8);
         pnmh.add(pn9);
+        pnmh.add(chonlocmh);
         pnmh.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 
         DSMH.add(scrollPaneDSMH, BorderLayout.CENTER);
