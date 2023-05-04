@@ -9,6 +9,8 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
@@ -22,6 +24,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
@@ -32,6 +35,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 public class GiaoDienSinhVien extends JFrame {
 
@@ -348,20 +352,183 @@ public class GiaoDienSinhVien extends JFrame {
 
         JPanel pnlChinhSua = new JPanel(new FlowLayout());
         JButton btSua = new JButton("Xác Nhận Chỉnh Sửa", new ImageIcon(GiaoDienDNSinhVien.getPathIcon() + "set_1.png"));
+        btSua.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame btSua=new JFrame ("Sửa Đổi Thông Tin");
+                btSua.setSize(500,500);
+                btSua.setVisible(true);
+                btSua.setLocationRelativeTo(null);
+                btSua.setLayout(new BorderLayout());
+                
+                
+                SinhVien sv= new SinhVien();
+                sv=SinhVienDAO.selectById(userID);
+                JPanel pnTTCN= new JPanel();
+                pnTTCN.setLayout(new BoxLayout(pnTTCN, BoxLayout.Y_AXIS));
+                JPanel pnTTCN1 = new JPanel(new GridLayout(9, 1));
+
+                //CENTER-MaSV
+                JPanel MaSV = new JPanel(new FlowLayout());
+                JLabel maSv = new JLabel("Mã Sinh Viên");
+                maSv.setPreferredSize(new Dimension(100, 30));
+                JLabel tfTTCN1 = new JLabel();
+                tfTTCN1.setPreferredSize(new Dimension(200, 30));
+                tfTTCN1.setText(sv.getMaSinhVien());
+                MaSV.add(maSv);
+                MaSV.add(tfTTCN1);
+                pnTTCN1.add(MaSV);
+
+                //CENTER-TenSV
+                JPanel TenSV = new JPanel(new FlowLayout());
+                JLabel TenSv = new JLabel("Họ Và Tên");
+                TenSv.setPreferredSize(new Dimension(100, 30));
+                TenSv.setSize(100, 100);
+                JTextField tfTTCN2 = new JTextField();
+                tfTTCN2.setText(sv.getTenSinhVien());
+                tfTTCN2.setPreferredSize(new Dimension(200, 30));
+                TenSV.add(TenSv);
+                TenSV.add(tfTTCN2);
+                pnTTCN1.add(TenSV);
+
+                //CENTER-Nam Sinh
+                JPanel NamSinh = new JPanel(new FlowLayout());
+                JLabel namSinh = new JLabel("Năm Sinh");
+                namSinh.setPreferredSize(new Dimension(100, 30));
+                namSinh.setSize(100, 100);
+                JTextField tfTTCN3 = new JTextField();
+                tfTTCN3.setText(sv.getNamSinh());
+                tfTTCN3.setPreferredSize(new Dimension(200, 30));
+                NamSinh.add(namSinh);
+                NamSinh.add(tfTTCN3);
+                pnTTCN1.add(NamSinh);
+
+                //CENTER-Giới Tính
+                 JPanel GioiTinh = new JPanel(new FlowLayout());
+                JLabel gioitinh = new JLabel("Giới Tính");
+                String[] luaChonTTCN = {"Nam", "Nữ"};
+                JComboBox<String> LuaChonTTCN = new JComboBox<>(luaChonTTCN);
+                if(sv.getGioiTinh().equalsIgnoreCase("Nam")){
+                    LuaChonTTCN.setSelectedIndex(0);
+                }
+                else LuaChonTTCN.setSelectedIndex(1);
+                gioitinh.setPreferredSize(new Dimension(100, 30));
+                LuaChonTTCN.setPreferredSize(new Dimension(200, 30));
+                GioiTinh.add(gioitinh);
+                GioiTinh.add(LuaChonTTCN);
+                pnTTCN1.add(GioiTinh);
+
+                //CENTER-Dân Tộc
+                JPanel DanToc = new JPanel(new FlowLayout());
+                JLabel dantoc = new JLabel("Dân Tộc");
+                dantoc.setPreferredSize(new Dimension(100, 30));
+                JTextField tfTTCN5 = new JTextField();
+                tfTTCN5.setText(sv.getDanToc());
+                tfTTCN5.setPreferredSize(new Dimension(200, 30));
+                DanToc.add(dantoc);
+                DanToc.add(tfTTCN5);
+                pnTTCN1.add(DanToc);
+
+                //CENTER-CCCD
+                JPanel CCCD = new JPanel(new FlowLayout());
+                JLabel cccd = new JLabel("CCCD/CMND");
+                cccd.setPreferredSize(new Dimension(100, 30));
+                JTextField tfTTCN6 = new JTextField();
+                tfTTCN6.setText(sv.getCCCD());
+                tfTTCN6.setPreferredSize(new Dimension(200, 30));
+                CCCD.add(cccd);
+                CCCD.add(tfTTCN6);
+                pnTTCN1.add(CCCD);
+
+                //CENTER-Sđt
+                JPanel SDT = new JPanel(new FlowLayout());
+                JLabel sdt = new JLabel("Số Điện Thoại");
+                sdt.setPreferredSize(new Dimension(100, 30));
+                JTextField tfTTCN7 = new JTextField();
+                tfTTCN7.setText(sv.getSoDienThoai());
+                tfTTCN7.setPreferredSize(new Dimension(200, 30));
+                SDT.add(sdt);
+                SDT.add(tfTTCN7);
+                pnTTCN1.add(SDT);
+
+                //Mã Khoa
+                JPanel KHOA = new JPanel(new FlowLayout());
+                JLabel khoa = new JLabel("Mã Khoa");
+                khoa.setPreferredSize(new Dimension(100, 30));
+                JTextField tfTTCN8 = new JTextField();
+                tfTTCN8.setText(sv.getMaKhoa());
+                tfTTCN8.setPreferredSize(new Dimension(200, 30));
+                KHOA.add(khoa);
+                KHOA.add(tfTTCN8);
+                pnTTCN1.add(KHOA);
+
+                //Mã Lớp
+                JPanel LOP = new JPanel(new FlowLayout());
+                JLabel lop = new JLabel("Mã Lớp");
+                lop.setPreferredSize(new Dimension(100, 30));
+                JTextField tfTTCN9 = new JTextField();
+                tfTTCN9.setText(sv.getMaLop());
+                tfTTCN9.setPreferredSize(new Dimension(200, 30));
+                LOP.add(lop);
+                LOP.add(tfTTCN9);
+                pnTTCN1.add(LOP);
+
+                pnTTCN.add(pnTTCN1);
+                btSua.add(pnTTCN,BorderLayout.CENTER);
+                
+                JPanel btXacNhanTT=new JPanel(new FlowLayout());
+                JButton XacNhan=new JButton("Xác Nhận");
+                XacNhan.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        String gioiTinh = (String) LuaChonTTCN.getSelectedItem();
+                        String TenSV=tfTTCN2.getText();
+                        String namSinh=tfTTCN3.getText();             
+                        String danToc=tfTTCN5.getText();
+                        String CCCD=tfTTCN6.getText();
+                        String sdt=tfTTCN7.getText();
+                        String maKhoa=tfTTCN8.getText();
+                        String maLop=tfTTCN9.getText();
+                        SinhVien sv=new SinhVien(userID,TenSV,namSinh,gioiTinh,danToc,CCCD,sdt,maKhoa,maLop);
+                        if(SinhVienDAO.update(sv)&&TenSV!=null&&namSinh!=null&&danToc!=null&&CCCD!=null&&sdt!=null&&maKhoa!=null&&maLop!=null){
+                            JOptionPane.showMessageDialog(new JFrame(), "Sửa Thông Tin Thành Công");
+                            tfTTCN1.setText(userID);
+                            tfTTCN2.setText(sv.getTenSinhVien());
+                            tfTTCN3.setText(sv.getNamSinh());
+                            if(gioiTinh.equalsIgnoreCase("Nam")){
+                                LuaChonTTCN.setSelectedIndex(0);
+                            }
+                            else LuaChonTTCN.setSelectedIndex(1);
+                            tfTTCN5.setText(sv.getDanToc());
+                            tfTTCN6.setText(sv.getCCCD());
+                            tfTTCN7.setText(sv.getSoDienThoai());
+                            tfTTCN8.setText(sv.getMaKhoa());
+                            tfTTCN9.setText(sv.getMaLop());
+                            btSua.dispose();
+                        }
+                        else JOptionPane.showMessageDialog(new JFrame(), "Sửa Thông Tin Không Thành Công");
+                    }
+                
+            });
+                JButton Huy=new JButton("Hủy");
+                Huy.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                            btSua.dispose();
+                        } 
+            });
+                btXacNhanTT.add(XacNhan);
+                btXacNhanTT.add(Huy);
+                btSua.add(btXacNhanTT,BorderLayout.SOUTH);
+            }
+    });
+            
         JButton btDoiMK = new JButton("Đổi Mật Khẩu");
         btDoiMK.addActionListener(e -> {
             JFrame fDoiMK = new JFrame("Đổi Mật Khẩu");
             fDoiMK.setLayout(new BorderLayout());
             fDoiMK.setSize(450, 150);
-
-            JPanel titlePnMK2 = new JPanel(new FlowLayout());
-            titlePnMK2.setPreferredSize(new Dimension(0, 50));
-            JButton btXacNhan = new JButton("Xác Nhận Thay Đổi", new ImageIcon(GiaoDienDNSinhVien.getPathIcon() + "change_1.png"));
-            titlePnMK2.add(btXacNhan);
-            JPanel titlePnMK3 = new JPanel();
-            titlePnMK3.setPreferredSize(new Dimension(40, 0));
-            JPanel titlePnMK4 = new JPanel();
-            titlePnMK4.setPreferredSize(new Dimension(40, 0));
+            
             JPanel DoiMK = new JPanel(new GridLayout(2, 2));
             DoiMK.add(new JLabel("Mật Khẩu Cũ"));
             JPasswordField DoiMkTF1 = new JPasswordField();
@@ -369,6 +536,33 @@ public class GiaoDienSinhVien extends JFrame {
             DoiMK.add(new JLabel("Mật Khẩu Mới"));
             JPasswordField DoiMkTF2 = new JPasswordField();
             DoiMK.add(DoiMkTF2);
+
+            JPanel titlePnMK2 = new JPanel(new FlowLayout());
+            titlePnMK2.setPreferredSize(new Dimension(0, 50));
+            JButton btXacNhan = new JButton("Xác Nhận Thay Đổi", new ImageIcon(GiaoDienDNSinhVien.getPathIcon() + "change_1.png"));
+            btXacNhan.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    SinhVien sv=new SinhVien();
+                    sv=SinhVienDAO.selectById(userID);
+                    char[] pass=DoiMkTF1.getPassword();
+                    String mkCu=new String(pass);
+                    char[] newpass=DoiMkTF2.getPassword();
+                    String mkMoi=new String(newpass);
+                    if(mkCu.equalsIgnoreCase(sv.getMatKhau())){
+                        if(SinhVienDAO.changePass(sv, mkMoi))   JOptionPane.showMessageDialog(new JFrame(), "Đổi Mật Khẩu Thành Công");
+                        else JOptionPane.showMessageDialog(new JFrame(), "Đổi Mật Khẩu Không Thành Công");
+                    }
+                    else JOptionPane.showMessageDialog(new JFrame(), "Mật Khẩu Cũ Không Trùng Khớp");
+                }
+            });
+            titlePnMK2.add(btXacNhan);
+            JPanel titlePnMK3 = new JPanel();
+            titlePnMK3.setPreferredSize(new Dimension(40, 0));
+            JPanel titlePnMK4 = new JPanel();
+            titlePnMK4.setPreferredSize(new Dimension(40, 0));
+            
+            
+            
 
             fDoiMK.add(DoiMK, BorderLayout.CENTER);
             fDoiMK.add(titlePnMK2, BorderLayout.SOUTH);

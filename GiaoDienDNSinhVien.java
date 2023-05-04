@@ -32,7 +32,6 @@ public class GiaoDienDNSinhVien extends JFrame {
 
         // Màn Hình Sinh Viên
         //Top---Màn Hình Đăng Nhập
-        //JLabel tieuDe = new JLabel("Màn Hình Đăng Nhập", new ImageIcon(Toolkit.getDefaultToolkit().createImage(GiaoDienDNSinhVien.class.getResource("account_1.png"))), JLabel.LEFT);
         JLabel tieuDe = new JLabel("Màn Hình Đăng Nhập", new ImageIcon(pathIcon + "account_1.png"), JLabel.CENTER);
         tieuDe.setAlignmentX(Component.CENTER_ALIGNMENT);
         tieuDe.setAlignmentY(Component.CENTER_ALIGNMENT);
